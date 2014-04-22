@@ -1,7 +1,10 @@
 package retrieval;
 
 /**
- * @author 
+ * 
+ * This program retrieves tweets from Twitter using the hbc API
+ * 
+ * @author natchan and lianhanloh
  *
  */
 public class RetrieveTweets {
