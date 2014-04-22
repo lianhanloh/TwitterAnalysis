@@ -41,6 +41,7 @@ public final class ShowUser {
             User user = twitter.showUser(args[0]);
             if (user.getStatus() != null) {
                 System.out.println("@" + user.getScreenName() + " - " + user.getStatus().getText());
+                System.out.println(user.getFriendsCount());
             } else {
                 // the user is protected
                 System.out.println("@" + user.getScreenName());
