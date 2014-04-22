@@ -4,7 +4,7 @@ TweetAnalysis
 This program will retrieve public tweets and analyze the data
 
 
-Dependencies
+Referenced libraries
 ====================
 
 - Guava, Google Core Library
@@ -27,3 +27,18 @@ http://www.findjar.com/jar/com/google/code/findbugs/jsr305/1.3.9/jsr305-1.3.9.ja
 - Simple Logging Facade for Java
 slf4j-api-1.7.7.jar
 http://www.slf4j.org/download.html
+
+- JUnit Testing
+
+- Twitter4j
+twitter4j-async-4.0.1.jar
+twitter4j-core-4.0.1.jar
+twitter4j-examples-4.0.1.jar
+twitter4j-media-support-4.0.1.jar
+twitter4j-stream-4.0.1.jar
+http://twitter4j.org/en/index.html#download
+
+- Mockito
+mockito-all-1.9.5.jar
+https://code.google.com/p/mockito/downloads/list
+
