@@ -4,7 +4,7 @@ TweetAnalysis
 This program will retrieve public tweets and analyze the data
 
 
-Referenced libraries
+Dependencies
 ====================
 
 - Guava, Google Core Library
