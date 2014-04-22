@@ -4,6 +4,12 @@ TweetAnalysis
 This program will retrieve public tweets and analyze the data
 
 
+Usage Instructions
+====================
+
+- Twitter developer authentication
+at <URL>
+
 Referenced libraries
 ====================
 
