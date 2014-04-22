@@ -1,5 +1,9 @@
 package retrieval;
 
+import java.io.IOException;
+import java.io.Writer;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -27,9 +31,18 @@ public class RetrieveTweets {
 //	private static HashMap<Long, String> followingUsers;
 	private static ArrayList<User> allUsers;
 	private static PagableResponseList<User> users;
+	private static String outputFile = "output.txt";
+	private static Writer out;
 
 	public static void main(String[] args) {
 //		followingUsers = new HashMap<Long, String>();
+		
+		try {
+			out = new BufferedWriter(new FileWriter(outputFile));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		int requests = 0;
 		try {
 			Twitter twitter = new TwitterFactory().getInstance();
@@ -58,6 +71,14 @@ public class RetrieveTweets {
 		while (it.hasNext()) {
 			User user = (User) it.next();
 			System.out.println(user.getName());
+			System.out.println(user.getURL());
+			System.out.println();
+			
+			try {
+				out.write(user.getName() + ", " + user.getURL() + '\n');
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		
