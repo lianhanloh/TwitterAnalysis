@@ -30,6 +30,7 @@ public class RetrieveTweets {
 
 	public static void main(String[] args) {
 //		followingUsers = new HashMap<Long, String>();
+		int requests = 0;
 		try {
 			Twitter twitter = new TwitterFactory().getInstance();
 			allUsers = new ArrayList<User>();
@@ -38,6 +39,7 @@ public class RetrieveTweets {
 			long cursor = -1; //start with page one, cursor as -1
 			do {
 				users = twitter.getFriendsList("natc221", cursor);
+				requests++;
 				allUsers.addAll(users);
 				cursor = users.getNextCursor();
 			}
@@ -48,8 +50,11 @@ public class RetrieveTweets {
 			System.out.println("Failed to delete status: " + te.getMessage());
 //			System.exit(-1);
 		}
+		finally {
+			System.out.println("Requests made: " + requests);
+		}
 		System.out.println("Done parsing following");
-		Iterator it = allUsers.iterator();
+		Iterator<User> it = allUsers.iterator();
 		while (it.hasNext()) {
 			User user = (User) it.next();
 			System.out.println(user.getName());
