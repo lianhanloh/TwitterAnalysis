@@ -1,5 +1,6 @@
 package retrieval;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -24,37 +25,37 @@ import twitter4j.User;
 public class RetrieveTweets {
 	
 //	private static HashMap<Long, String> followingUsers;
+	private static ArrayList<User> allUsers;
 	private static PagableResponseList<User> users;
 
 	public static void main(String[] args) {
 //		followingUsers = new HashMap<Long, String>();
 		try {
 			Twitter twitter = new TwitterFactory().getInstance();
-			users = twitter.getFriendsList("natc221", (long) -1);
-//			for (long x: ids.getIDs()) {
-//				followingUsers.put(x, twitter.showUser(x).getName());
-////				System.out.println(twitter.showUser(x).getName());
-//			}
+			allUsers = new ArrayList<User>();
+			
+			//while there is a next page, get users
+			long cursor = -1; //start with page one, cursor as -1
+			do {
+				users = twitter.getFriendsList("natc221", cursor);
+				allUsers.addAll(users);
+				cursor = users.getNextCursor();
+			}
+			while (users.hasNext());
+			
 		} catch (TwitterException te) {
 			te.printStackTrace();
 			System.out.println("Failed to delete status: " + te.getMessage());
 //			System.exit(-1);
 		}
 		System.out.println("Done parsing following");
-		Iterator it = users.iterator();
+		Iterator it = allUsers.iterator();
 		while (it.hasNext()) {
 			User user = (User) it.next();
 			System.out.println(user.getName());
 		}
 		
 		
-		
-//		Collection<Entry<Long, String>> names = followingUsers.entrySet();
-//		Iterator<Entry<Long, String>> it = names.iterator();
-//		while (it.hasNext()) {
-//			Entry<Long, String> entry = (Entry<Long, String>) it.next();
-//			System.out.println(entry.getKey() + ": " + entry.getValue());
-//		}
 	}
 
 	
