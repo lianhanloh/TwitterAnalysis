@@ -31,7 +31,7 @@ public class RetrieveTweets {
 //	private static HashMap<Long, String> followingUsers;
 	private static ArrayList<User> allUsers;
 	private static PagableResponseList<User> users;
-	private static String outputFile = "output.txt";
+	private static String outputFile = "output2.txt";
 	private static Writer out;
 
 	public static void main(String[] args) {
