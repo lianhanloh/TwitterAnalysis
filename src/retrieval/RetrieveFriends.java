@@ -31,50 +31,58 @@ public class RetrieveFriends {
 
 	public static void main(String[] args) {
 		if (args.length != 1) {
-			System.out.println("Wrong number of arguments");
+			System.out.println("Wrong number of arguments:");
+			System.out.println("Please input member ID");
+			System.out.println("Exiting...");
 			System.exit(-1);
 		}
 		HashSet<Long> currentQueue = new HashSet<Long>();
-		
+
 		try {
 			BufferedReader in = new BufferedReader(new FileReader(QUEUE));
-			
+
 			String line = null;
-			do {
+			while ((line = in.readLine()) != null) {
 				long user = Long.parseLong(in.readLine());
 				currentQueue.add(user);
 			}
-			while (line != null);
-			
+
 			//create writers that will write at end of file and append
-			Writer outEdge = 
+			BufferedWriter outEdge = 
 					new BufferedWriter(new FileWriter(EDGE_LIST, true));
-			Writer outQueue = 
+			BufferedWriter outQueue = 
 					new BufferedWriter(new FileWriter(QUEUE, true));
 
 			//user ID is argument
 			long userID = Long.parseLong(args[0]);
 
 			Twitter twitter = new TwitterFactory().getInstance();
-			List<Long> friendsIDs = new ArrayList<Long>();
 
 			//get friends' IDs
 			IDs ids = null;
 			do {
+				System.out.println("No. of friends: " + 
+						twitter.showUser(userID).getFriendsCount());
+
 				ids = twitter.getFriendsIDs(userID, -1);
 				long[] list = ids.getIDs();
+				System.out.println("List length:" + list.length);
 				for (long x: list) {
+					String xID = Long.toString(x);
+
 					//if not already in queue
 					if (!currentQueue.contains(x)) {
-						outQueue.write(Long.toString(x));
+						outQueue.write(xID);
+						outQueue.newLine();
 					}
-					//TODO
-					String edge = Long.toString(x);
-					friendsIDs.add(x);
+					outEdge.write(userID + " " + xID);
+					outEdge.newLine();
 				}
 			}
 			while (ids.hasNext());
 
+			outEdge.close();
+			outQueue.close();
 		} catch (TwitterException e) {
 			e.printStackTrace();
 		} catch (IOException e1) {
