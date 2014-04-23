@@ -5,20 +5,15 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Reader;
-import java.io.Writer;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 
 import twitter4j.IDs;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
-import twitter4j.User;
 
 /**
+ * @author Nathaniel Chan
  * Takes in a member id as an argument, then writes the
  * list of friends to one output .txt, and that its connected
  * to these friends in an edge list.
@@ -36,14 +31,19 @@ public class RetrieveFriends {
 			System.out.println("Exiting...");
 			System.exit(-1);
 		}
+		//used so that users are not duplicated in queue
 		HashSet<Long> currentQueue = new HashSet<Long>();
 
 		try {
+			//user ID is argument
+			long userID = Long.parseLong(args[0]);
+			System.out.println("Collecting friends of " + userID);
+			
 			BufferedReader in = new BufferedReader(new FileReader(QUEUE));
 
 			String line = null;
 			while ((line = in.readLine()) != null) {
-				long user = Long.parseLong(in.readLine());
+				long user = Long.parseLong(line);
 				currentQueue.add(user);
 			}
 
@@ -53,20 +53,14 @@ public class RetrieveFriends {
 			BufferedWriter outQueue = 
 					new BufferedWriter(new FileWriter(QUEUE, true));
 
-			//user ID is argument
-			long userID = Long.parseLong(args[0]);
 
 			Twitter twitter = new TwitterFactory().getInstance();
 
 			//get friends' IDs
 			IDs ids = null;
 			do {
-				System.out.println("No. of friends: " + 
-						twitter.showUser(userID).getFriendsCount());
-
 				ids = twitter.getFriendsIDs(userID, -1);
 				long[] list = ids.getIDs();
-				System.out.println("List length:" + list.length);
 				for (long x: list) {
 					String xID = Long.toString(x);
 
@@ -80,16 +74,17 @@ public class RetrieveFriends {
 				}
 			}
 			while (ids.hasNext());
+			
+			System.out.println("Process complete.");
 
-			outEdge.close();
+			//close streams
 			outQueue.close();
+			outEdge.close();
+			in.close();
 		} catch (TwitterException e) {
 			e.printStackTrace();
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-
-
 	}
-
 }
