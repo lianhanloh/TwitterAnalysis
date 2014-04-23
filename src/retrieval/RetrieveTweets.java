@@ -51,7 +51,7 @@ public class RetrieveTweets {
 			//while there is a next page, get users
 			long cursor = -1; //start with page one, cursor as -1
 			do {
-				users = twitter.getFriendsList("natc221", cursor);
+				users = twitter.getFriendsList(17461978, cursor);
 				requests++;
 				allUsers.addAll(users);
 				cursor = users.getNextCursor();
@@ -71,6 +71,7 @@ public class RetrieveTweets {
 		while (it.hasNext()) {
 			User user = (User) it.next();
 			System.out.println(user.getName());
+			System.out.println(user.getId());
 			System.out.println(user.getURL());
 			System.out.println();
 			
