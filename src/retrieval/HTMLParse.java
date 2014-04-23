@@ -7,18 +7,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.HashMap;
-<<<<<<< HEAD
 import java.util.Iterator;
 import java.util.List;
-=======
->>>>>>> FETCH_HEAD
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-<<<<<<< HEAD
 import twitter4j.Paging;
 import twitter4j.Status;
 import twitter4j.Twitter;
@@ -31,13 +27,6 @@ public class HTMLParse {
 	private static HashMap<String, String> allUsers;
 	private static HashMap<String, List<Status>> userToStatuses;
 
-=======
-public class HTMLParse {
-	
-	private static final String inputFile = "output.txt";
-	private static HashMap<String, String> allUsers;
-	
->>>>>>> FETCH_HEAD
 	public static void main(String[] args) {
 		allUsers = new HashMap<String, String>();
 		try {
@@ -45,15 +34,8 @@ public class HTMLParse {
 			while (true) {
 				String name = in.readLine();
 				String URL = in.readLine();
-<<<<<<< HEAD
-
 				if (name == null || URL == null) break;
 
-=======
-				
-				if (name == null || URL == null) break;
-				
->>>>>>> FETCH_HEAD
 				if (!URL.equals("null")) {
 					allUsers.put(name, URL);
 					System.out.println();
@@ -62,19 +44,12 @@ public class HTMLParse {
 				}
 				in.readLine();
 			}
-<<<<<<< HEAD
-
-=======
-			
->>>>>>> FETCH_HEAD
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-<<<<<<< HEAD
-
 		try {
 
 			Twitter twitter = new TwitterFactory().getInstance();
@@ -98,47 +73,31 @@ public class HTMLParse {
 		Document doc;
 		try {
 			doc = Jsoup.connect(URL).get();
-=======
-		
-		try {
-			String URL = allUsers.get("Al Gore");
-			Document doc = Jsoup.connect(URL).get();
-			
->>>>>>> FETCH_HEAD
 			for (Element x: doc.getAllElements()) {
 				System.out.println(x.text());
 				
 			}
 			Elements categoryData = doc.select("[href]");
 			System.out.println(categoryData.text());
-<<<<<<< HEAD
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 
-	}
-=======
-				
-		}
-		catch (IOException e) {
-			System.out.println(e.getMessage());
-		}
-		
-		
-//		try {
-//			String url = Main.FACTBOOK_URL;
-//			url = url.substring(0, 59);
-//			url += country.getURL();
-//			System.out.println("URL: " + url);
-//			doc = Jsoup.connect(url).get();
-//
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-		
-	}
 
->>>>>>> FETCH_HEAD
+
+
+		//		try {
+		//			String url = Main.FACTBOOK_URL;
+		//			url = url.substring(0, 59);
+		//			url += country.getURL();
+		//			System.out.println("URL: " + url);
+		//			doc = Jsoup.connect(url).get();
+		//
+		//		} catch (IOException e) {
+		//			e.printStackTrace();
+		//		}
+
+	}
 }
