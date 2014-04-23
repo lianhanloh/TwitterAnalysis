@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 import twitter4j.IDs;
@@ -23,21 +24,19 @@ public class RetrieveFriends {
 
 	private static final String QUEUE = "queue.txt";
 	private static final String EDGE_LIST = "edgeList.txt";
+	private static final long START_ID = 17461978;
 
 	public static void main(String[] args) {
-		if (args.length != 1) {
+		if (args.length != 0) {
 			System.out.println("Wrong number of arguments:");
 			System.out.println("Please input member ID");
 			System.out.println("Exiting...");
 			System.exit(-1);
 		}
 		//used so that users are not duplicated in queue
-		HashSet<Long> currentQueue = new HashSet<Long>();
+		ArrayList<Long> currentQueue = new ArrayList<Long>();
 
 		try {
-			//user ID is argument
-			long userID = Long.parseLong(args[0]);
-			System.out.println("Collecting friends of " + userID);
 			
 			BufferedReader in = new BufferedReader(new FileReader(QUEUE));
 
@@ -46,12 +45,27 @@ public class RetrieveFriends {
 				long user = Long.parseLong(line);
 				currentQueue.add(user);
 			}
-
+			//get friends of head of queue
+			long userID = 0;
+			if (currentQueue.size() != 0) {
+				userID = currentQueue.get(0);
+			}
+			else {
+				userID = START_ID;
+			}
+			System.out.println("Collecting friends of " + userID);
+			
 			//create writers that will write at end of file and append
 			BufferedWriter outEdge = 
 					new BufferedWriter(new FileWriter(EDGE_LIST, true));
 			BufferedWriter outQueue = 
-					new BufferedWriter(new FileWriter(QUEUE, true));
+					new BufferedWriter(new FileWriter(QUEUE));
+			
+			currentQueue.remove(0);
+			for (long x: currentQueue) {
+				outQueue.write(Long.toString(x));
+				outQueue.newLine();
+			}
 
 
 			Twitter twitter = new TwitterFactory().getInstance();
