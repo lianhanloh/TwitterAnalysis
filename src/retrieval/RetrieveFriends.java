@@ -22,8 +22,8 @@ import twitter4j.TwitterFactory;
  */
 public class RetrieveFriends {
 
-	private static final String QUEUE = "queue.txt";
-	private static final String EDGE_LIST = "edgeList.txt";
+	private static final String QUEUE = "queueTest.txt";
+	private static final String EDGE_LIST = "edgeListTest.txt";
 	private static final long START_ID = 17461978;
 
 	public static void main(String[] args) {
@@ -46,32 +46,25 @@ public class RetrieveFriends {
 				currentQueue.add(user);
 			}
 			//get friends of head of queue
-			long userID = 0;
+			long userID = START_ID;
 			if (currentQueue.size() != 0) {
 				userID = currentQueue.get(0);
 			}
-			else {
-				userID = START_ID;
-			}
 			System.out.println("Collecting friends of " + userID);
 
-			//create writers that will write at end of file and append
+			//create writer for edge list
+			//that will write at end of file and append
 			BufferedWriter outEdge = 
 					new BufferedWriter(new FileWriter(EDGE_LIST, true));
+			
+			//writer for printing the queue
 			BufferedWriter outQueue = 
 					new BufferedWriter(new FileWriter(QUEUE));
-
-			if (currentQueue.size() > 0)
-				currentQueue.remove(0);
-			for (long x: currentQueue) {
-				outQueue.write(Long.toString(x));
-				outQueue.newLine();
-			}
 
 
 			Twitter twitter = new TwitterFactory().getInstance();
 
-			//get friends' (following) IDs and print
+			//get friends' (following) IDs and add to edge list and queue
 			IDs ids = twitter.getFriendsIDs(userID, -1);
 			long[] list = ids.getIDs();
 			for (long x: list) {
@@ -79,14 +72,13 @@ public class RetrieveFriends {
 
 				//if not already in queue
 				if (!currentQueue.contains(x)) {
-					outQueue.write(xID);
-					outQueue.newLine();
+					currentQueue.add(x);
 				}
 				outEdge.write(userID + " " + xID);
 				outEdge.newLine();
 			}
 
-			//get and print followers
+			//get followers, add to queue and print to edge list
 			IDs followerIDs = twitter.getFollowersIDs(userID, -1);
 			long[] list2 = followerIDs.getIDs();
 			for (long x: list2) {
@@ -94,15 +86,24 @@ public class RetrieveFriends {
 
 				//if not already in queue
 				if (!currentQueue.contains(x)) {
-					outQueue.write(xID);
-					outQueue.newLine();
+					currentQueue.add(x);
 				}
 				outEdge.write(xID + " " + userID);
 				outEdge.newLine();
 			}
 
+			
+			//print queue into text file
+			if (currentQueue.size() > 0) {
+				currentQueue.remove(userID);
+			}
+			for (long x: currentQueue) {
+				outQueue.write(Long.toString(x));
+				outQueue.newLine();
+			}
+			
 			System.out.println("Process complete.");
-
+			
 			//close streams
 			outQueue.close();
 			outEdge.close();
