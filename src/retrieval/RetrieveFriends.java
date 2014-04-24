@@ -25,6 +25,10 @@ public class RetrieveFriends {
 	private static final String QUEUE = "queueTest.txt";
 	private static final String EDGE_LIST = "edgeListTest.txt";
 	private static final long START_ID = 17461978;
+	
+	private static BufferedReader in;
+	private static BufferedWriter outEdge;
+	private static BufferedWriter outQueue;
 
 	public static void main(String[] args) {
 		if (args.length != 0) {
@@ -38,7 +42,7 @@ public class RetrieveFriends {
 
 		try {
 
-			BufferedReader in = new BufferedReader(new FileReader(QUEUE));
+			in = new BufferedReader(new FileReader(QUEUE));
 
 			String line = null;
 			while ((line = in.readLine()) != null) {
@@ -54,11 +58,11 @@ public class RetrieveFriends {
 
 			//create writer for edge list
 			//that will write at end of file and append
-			BufferedWriter outEdge = 
+			outEdge = 
 					new BufferedWriter(new FileWriter(EDGE_LIST, true));
 			
 			//writer for printing the queue
-			BufferedWriter outQueue = 
+			outQueue = 
 					new BufferedWriter(new FileWriter(QUEUE));
 
 
@@ -104,14 +108,22 @@ public class RetrieveFriends {
 			
 			System.out.println("Process complete.");
 			
-			//close streams
-			outQueue.close();
-			outEdge.close();
-			in.close();
 		} catch (TwitterException e) {
 			e.printStackTrace();
 		} catch (IOException e1) {
 			e1.printStackTrace();
+		}
+		finally {
+			//close streams
+			try {
+				outQueue.close();
+				outEdge.close();
+				in.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 	}
 }
