@@ -37,7 +37,7 @@ public class RetrieveFriends {
 		ArrayList<Long> currentQueue = new ArrayList<Long>();
 
 		try {
-			
+
 			BufferedReader in = new BufferedReader(new FileReader(QUEUE));
 
 			String line = null;
@@ -54,14 +54,15 @@ public class RetrieveFriends {
 				userID = START_ID;
 			}
 			System.out.println("Collecting friends of " + userID);
-			
+
 			//create writers that will write at end of file and append
 			BufferedWriter outEdge = 
 					new BufferedWriter(new FileWriter(EDGE_LIST, true));
 			BufferedWriter outQueue = 
 					new BufferedWriter(new FileWriter(QUEUE));
-			
-			currentQueue.remove(0);
+
+			if (currentQueue.size() > 0)
+				currentQueue.remove(0);
 			for (long x: currentQueue) {
 				outQueue.write(Long.toString(x));
 				outQueue.newLine();
@@ -70,25 +71,36 @@ public class RetrieveFriends {
 
 			Twitter twitter = new TwitterFactory().getInstance();
 
-			//get friends' IDs
-			IDs ids = null;
-			do {
-				ids = twitter.getFriendsIDs(userID, -1);
-				long[] list = ids.getIDs();
-				for (long x: list) {
-					String xID = Long.toString(x);
+			//get friends' (following) IDs and print
+			IDs ids = twitter.getFriendsIDs(userID, -1);
+			long[] list = ids.getIDs();
+			for (long x: list) {
+				String xID = Long.toString(x);
 
-					//if not already in queue
-					if (!currentQueue.contains(x)) {
-						outQueue.write(xID);
-						outQueue.newLine();
-					}
-					outEdge.write(userID + " " + xID);
-					outEdge.newLine();
+				//if not already in queue
+				if (!currentQueue.contains(x)) {
+					outQueue.write(xID);
+					outQueue.newLine();
 				}
+				outEdge.write(userID + " " + xID);
+				outEdge.newLine();
 			}
-			while (ids.hasNext());
-			
+
+			//get and print followers
+			IDs followerIDs = twitter.getFollowersIDs(userID, -1);
+			long[] list2 = followerIDs.getIDs();
+			for (long x: list2) {
+				String xID = Long.toString(x);
+
+				//if not already in queue
+				if (!currentQueue.contains(x)) {
+					outQueue.write(xID);
+					outQueue.newLine();
+				}
+				outEdge.write(xID + " " + userID);
+				outEdge.newLine();
+			}
+
 			System.out.println("Process complete.");
 
 			//close streams
