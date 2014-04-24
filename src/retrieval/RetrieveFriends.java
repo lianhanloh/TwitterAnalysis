@@ -22,8 +22,8 @@ import twitter4j.TwitterFactory;
  */
 public class RetrieveFriends {
 
-	private static final String QUEUE = "queueTest.txt";
-	private static final String EDGE_LIST = "edgeListTest.txt";
+	private static final String QUEUE = "queue.txt";
+	private static final String EDGE_LIST = "edgeList.txt";
 	private static final long START_ID = 17461978;
 	
 	private static BufferedReader in;
