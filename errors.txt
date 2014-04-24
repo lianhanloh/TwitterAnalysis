@@ -74,3 +74,22 @@ TwitterException{exceptionCode=[0fd39a69-1aa4245d], statusCode=429, message=Rate
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.lang.reflect.Method.invoke(Method.java:606)
 	at org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader.main(JarRsrcLoader.java:58)
+429:Returned in API v1.1 when a request cannot be served due to the application's rate limit having been exhausted for the resource. See Rate Limiting in API v1.1.(https://dev.twitter.com/docs/rate-limiting/1.1)
+message - Rate limit exceeded
+code - 88
+
+Relevant discussions can be found on the Internet at:
+	http://www.google.co.jp/search?q=a0c96a69 or
+	http://www.google.co.jp/search?q=1935c143
+TwitterException{exceptionCode=[a0c96a69-1935c143], statusCode=429, message=Rate limit exceeded, code=88, retryAfter=-1, rateLimitStatus=RateLimitStatusJSONImpl{remaining=0, limit=15, resetTimeInSeconds=1398374042, secondsUntilReset=0}, version=4.0.1}
+	at twitter4j.HttpClientImpl.handleRequest(HttpClientImpl.java:164)
+	at twitter4j.HttpClientBase.request(HttpClientBase.java:53)
+	at twitter4j.HttpClientBase.get(HttpClientBase.java:71)
+	at twitter4j.TwitterImpl.get(TwitterImpl.java:1950)
+	at twitter4j.TwitterImpl.getFriendsIDs(TwitterImpl.java:395)
+	at retrieval.RetrieveFriends.main(RetrieveFriends.java:72)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader.main(JarRsrcLoader.java:58)
