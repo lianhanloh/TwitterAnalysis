@@ -53,6 +53,7 @@ public class RetrieveFriends {
 			if (currentQueue.size() != 0) {
 				userID = currentQueue.get(0);
 			}
+			in.close();
 			
 			SortUsers sort = new SortUsers();
 			HashSet<Long> allUsers = sort.getNodes();
@@ -77,8 +78,8 @@ public class RetrieveFriends {
 				String xID = Long.toString(x);
 
 				//if not already in queue
-				if (!allUsers.contains(x)) {
-					allUsers.add(x);
+				if (!allUsers.contains(x) && !currentQueue.contains(x)) {
+					currentQueue.add(x);
 				}
 				outEdge.write(userID + " " + xID);
 				outEdge.newLine();
@@ -91,8 +92,8 @@ public class RetrieveFriends {
 				String xID = Long.toString(x);
 
 				//if not already in queue
-				if (!allUsers.contains(x)) {
-					allUsers.add(x);
+				if (!allUsers.contains(x) && !currentQueue.contains(x)) {
+					currentQueue.add(x);
 				}
 				outEdge.write(xID + " " + userID);
 				outEdge.newLine();
@@ -119,7 +120,6 @@ public class RetrieveFriends {
 			try {
 				outQueue.close();
 				outEdge.close();
-				in.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
