@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map.Entry;
 
 import twitter4j.IDs;
 import twitter4j.Twitter;
@@ -35,7 +37,6 @@ public class RetrieveFriends {
 	public static void main(String[] args) {
 		if (args.length != 0) {
 			System.out.println("Wrong number of arguments:");
-			System.out.println("Please input member ID");
 			System.out.println("Exiting...");
 			System.exit(-1);
 		}
@@ -90,28 +91,30 @@ public class RetrieveFriends {
 			IDs ids = twitter.getFriendsIDs(userID, -1);
 			long[] list = ids.getIDs();
 			for (long x: list) {
-				String xID = Long.toString(x);
+//				String xID = Long.toString(x);
 
 				//if not already in queue
 				if (!allUsers.contains(x) && !currentQueue.contains(x)) {
 					currentQueue.add(x);
 				}
-				outEdge.write(userID + " " + xID);
-				outEdge.newLine();
+				edgeMap.put(userID, x);
+//				outEdge.write(userID + " " + xID);
+//				outEdge.newLine();
 			}
 
 			//get followers, add to queue and print to edge list
 			IDs followerIDs = twitter.getFollowersIDs(userID, -1);
 			long[] list2 = followerIDs.getIDs();
 			for (long x: list2) {
-				String xID = Long.toString(x);
+//				String xID = Long.toString(x);
 
 				//if not already in queue
 				if (!allUsers.contains(x) && !currentQueue.contains(x)) {
 					currentQueue.add(x);
 				}
-				outEdge.write(xID + " " + userID);
-				outEdge.newLine();
+				edgeMap.put(x, userID);
+//				outEdge.write(xID + " " + userID);
+//				outEdge.newLine();
 			}
 			
 			//print queue into text file
@@ -123,6 +126,13 @@ public class RetrieveFriends {
 				outQueue.newLine();
 			}
 			
+			//print edges, based on map
+			Iterator<Entry<Long, Long>> it = edgeMap.entrySet().iterator();
+			while (it.hasNext()) {
+				Entry<Long, Long> entry = it.next();
+				outEdge.write(entry.getKey() + " " + entry.getValue());
+				outEdge.newLine();
+			}
 			outQueue.close();
 			outEdge.close();
 			
