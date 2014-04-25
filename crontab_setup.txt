@@ -1,0 +1,11 @@
+type in the command " crontab -e " 
+on eniac, emacs (a text editor) should open up. just type in the following two lines.
+Update the file path to "pullFollowersData.sh" to the file path for that file in your eniac account
+Press ctrl + c, ctrl + s to save.
+Press ctrl + c, ctrl + x to exit. 
+
+if you get the output "crontab edited" you should be fine. just check count.txt to see if the count is being updated
+	every minute. 
+
+# pulls Twitter user data every min
+# * * * * * ~/Documents/nets150/TweetAnalysis/pullFollowersData.sh > /dev/null 2>&1
