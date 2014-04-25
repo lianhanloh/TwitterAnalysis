@@ -22,8 +22,8 @@ import twitter4j.TwitterFactory;
  */
 public class RetrieveFriends {
 
-	private static final String QUEUE = "queueTest.txt";
-	private static final String EDGE_LIST = "edgeListTest.txt";
+	private static final String QUEUE = "queue.txt";
+	private static final String EDGE_LIST = "edgeList.txt";
 	private static final long START_ID = 17461978;
 	
 	private static BufferedReader in;
@@ -41,7 +41,6 @@ public class RetrieveFriends {
 		ArrayList<Long> currentQueue = new ArrayList<Long>();
 
 		try {
-
 			in = new BufferedReader(new FileReader(QUEUE));
 			
 			String line = null;
@@ -68,7 +67,6 @@ public class RetrieveFriends {
 			//writer for printing the queue
 			outQueue = 
 					new BufferedWriter(new FileWriter(QUEUE));
-
 
 			Twitter twitter = new TwitterFactory().getInstance();
 
@@ -99,7 +97,6 @@ public class RetrieveFriends {
 				outEdge.write(xID + " " + userID);
 				outEdge.newLine();
 			}
-
 			
 			//print queue into text file
 			if (currentQueue.size() > 0) {
