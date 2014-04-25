@@ -22,8 +22,8 @@ import twitter4j.TwitterFactory;
  */
 public class RetrieveFriends {
 
-	private static final String QUEUE = "queue.txt";
-	private static final String EDGE_LIST = "edgeList.txt";
+	private static final String QUEUE = "queueTest.txt";
+	private static final String EDGE_LIST = "edgeListTest.txt";
 	private static final long START_ID = 17461978;
 	
 	private static BufferedReader in;
@@ -43,7 +43,7 @@ public class RetrieveFriends {
 		try {
 
 			in = new BufferedReader(new FileReader(QUEUE));
-
+			
 			String line = null;
 			while ((line = in.readLine()) != null) {
 				long user = Long.parseLong(line);
@@ -54,6 +54,10 @@ public class RetrieveFriends {
 			if (currentQueue.size() != 0) {
 				userID = currentQueue.get(0);
 			}
+			
+			SortUsers sort = new SortUsers();
+			HashSet<Long> allUsers = sort.getNodes();
+			
 			System.out.println("Collecting friends of " + userID);
 
 			//create writer for edge list
@@ -75,8 +79,8 @@ public class RetrieveFriends {
 				String xID = Long.toString(x);
 
 				//if not already in queue
-				if (!currentQueue.contains(x)) {
-					currentQueue.add(x);
+				if (!allUsers.contains(x)) {
+					allUsers.add(x);
 				}
 				outEdge.write(userID + " " + xID);
 				outEdge.newLine();
@@ -89,8 +93,8 @@ public class RetrieveFriends {
 				String xID = Long.toString(x);
 
 				//if not already in queue
-				if (!currentQueue.contains(x)) {
-					currentQueue.add(x);
+				if (!allUsers.contains(x)) {
+					allUsers.add(x);
 				}
 				outEdge.write(xID + " " + userID);
 				outEdge.newLine();
