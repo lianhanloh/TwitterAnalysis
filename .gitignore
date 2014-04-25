@@ -20,3 +20,6 @@ hs_err_pid*
 
 # .tsv files are too big
 *.tsv
+
+# ignore the stanford NLP library because it's too big for github
+lib/stanford*
