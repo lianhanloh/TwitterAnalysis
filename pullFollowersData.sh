@@ -5,4 +5,4 @@
 cd ~/Documents/nets150/TweetAnalysis
 java -jar retrieveFriends.jar 2>> errors.txt
 cur=$(cat count.txt | tail -1)
-echo $((cur + 1)) >> count.txt
+echo $((cur + 1)) > count.txt
