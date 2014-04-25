@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
@@ -25,6 +26,8 @@ public class SortUsers {
 	public static void main(String[] args) {
 		System.out.println("Sorting nodes from " + EDGE_LIST);
 		HashSet<Long> userSet = new HashSet<Long>();
+		
+		HashMap<Long, Long> map = new HashMap<Long, Long>();
 
 		BufferedReader in = null;
 		BufferedWriter out = null;
@@ -43,11 +46,14 @@ public class SortUsers {
 				}
 				long from = Long.parseLong(split[0]);
 				long to = Long.parseLong(split[1]);
+				
+				map.put(from, to);
 
 				//add users to set
 				userSet.add(from);
 				userSet.add(to);
 			}
+			System.out.println("Map size: " + map.size());
 
 			//sort the list of users
 			System.out.println("Sorting...");

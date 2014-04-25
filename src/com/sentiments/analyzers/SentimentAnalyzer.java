@@ -23,7 +23,7 @@ public class SentimentAnalyzer {
             Annotation annotation = pipeline.process(line);
             for (CoreMap sentence : annotation.get(CoreAnnotations.SentencesAnnotation.class)) {
                 Tree tree = sentence.get(SentimentCoreAnnotations.AnnotatedTree.class);
-                int sentiment = edu.stanford.nlp.neural.rnn.RNNCoreAnnotations.getPredictedClass(tree);
+                int sentiment = edu.stanford.nlp.neural.rnn.RNNCoreAnnotations.getPredictedClass(tree);8
                 String partText = sentence.toString();
                 if (partText.length() > longest) {
                     mainSentiment = sentiment;
