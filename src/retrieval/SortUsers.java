@@ -23,12 +23,10 @@ public class SortUsers {
 	private static final String EDGE_LIST = "edgeList.txt";
 	private static final String NODE_LIST = "nodeList.txt";
 
-	public static void main(String[] args) {
+	public HashSet<Long> getNodes() {
 		System.out.println("Sorting nodes from " + EDGE_LIST);
 		HashSet<Long> userSet = new HashSet<Long>();
 		
-		HashMap<Long, Long> map = new HashMap<Long, Long>();
-
 		BufferedReader in = null;
 		BufferedWriter out = null;
 
@@ -47,13 +45,11 @@ public class SortUsers {
 				long from = Long.parseLong(split[0]);
 				long to = Long.parseLong(split[1]);
 				
-				map.put(from, to);
 
 				//add users to set
 				userSet.add(from);
 				userSet.add(to);
 			}
-			System.out.println("Map size: " + map.size());
 
 			//sort the list of users
 			System.out.println("Sorting...");
@@ -71,6 +67,7 @@ public class SortUsers {
 				out.newLine();
 			}
 			System.out.println("Nodes written to " + NODE_LIST);
+			
 
 
 
@@ -86,6 +83,7 @@ public class SortUsers {
 				e.printStackTrace();
 			}
 		}
+		return userSet;
 
 
 	}

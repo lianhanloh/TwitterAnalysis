@@ -41,9 +41,8 @@ public class RetrieveFriends {
 		ArrayList<Long> currentQueue = new ArrayList<Long>();
 
 		try {
-
 			in = new BufferedReader(new FileReader(QUEUE));
-
+			
 			String line = null;
 			while ((line = in.readLine()) != null) {
 				long user = Long.parseLong(line);
@@ -54,6 +53,10 @@ public class RetrieveFriends {
 			if (currentQueue.size() != 0) {
 				userID = currentQueue.get(0);
 			}
+			
+			SortUsers sort = new SortUsers();
+			HashSet<Long> allUsers = sort.getNodes();
+			
 			System.out.println("Collecting friends of " + userID);
 
 			//create writer for edge list
@@ -65,7 +68,6 @@ public class RetrieveFriends {
 			outQueue = 
 					new BufferedWriter(new FileWriter(QUEUE));
 
-
 			Twitter twitter = new TwitterFactory().getInstance();
 
 			//get friends' (following) IDs and add to edge list and queue
@@ -75,8 +77,8 @@ public class RetrieveFriends {
 				String xID = Long.toString(x);
 
 				//if not already in queue
-				if (!currentQueue.contains(x)) {
-					currentQueue.add(x);
+				if (!allUsers.contains(x)) {
+					allUsers.add(x);
 				}
 				outEdge.write(userID + " " + xID);
 				outEdge.newLine();
@@ -89,13 +91,12 @@ public class RetrieveFriends {
 				String xID = Long.toString(x);
 
 				//if not already in queue
-				if (!currentQueue.contains(x)) {
-					currentQueue.add(x);
+				if (!allUsers.contains(x)) {
+					allUsers.add(x);
 				}
 				outEdge.write(xID + " " + userID);
 				outEdge.newLine();
 			}
-
 			
 			//print queue into text file
 			if (currentQueue.size() > 0) {
