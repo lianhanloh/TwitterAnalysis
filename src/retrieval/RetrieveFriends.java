@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 
 import twitter4j.IDs;
@@ -27,6 +28,7 @@ public class RetrieveFriends {
 	private static final long START_ID = 17461978;
 	
 	private static BufferedReader in;
+	private static BufferedReader inEdge;
 	private static BufferedWriter outEdge;
 	private static BufferedWriter outQueue;
 
@@ -39,9 +41,13 @@ public class RetrieveFriends {
 		}
 		//used so that users are not duplicated in queue
 		ArrayList<Long> currentQueue = new ArrayList<Long>();
+		
+		//map of edges
+		HashMap<Long, Long> edgeMap = new HashMap<Long, Long>();
 
 		try {
 			in = new BufferedReader(new FileReader(QUEUE));
+			inEdge = new BufferedReader(new FileReader(EDGE_LIST));
 			
 			String line = null;
 			while ((line = in.readLine()) != null) {
@@ -55,8 +61,17 @@ public class RetrieveFriends {
 			}
 			in.close();
 			
-			SortUsers sort = new SortUsers();
-			HashSet<Long> allUsers = sort.getNodes();
+			while ((line = inEdge.readLine()) != null) {
+				String[] split = line.split(" ");
+				long from = Long.parseLong(split[0].trim());
+				long to = Long.parseLong(split[1].trim());
+				edgeMap.put(from, to);
+			}
+			inEdge.close();
+			
+			HashSet<Long> allUsers = new HashSet<Long>();
+			allUsers.addAll(edgeMap.keySet());
+			allUsers.addAll(edgeMap.values());
 			
 			System.out.println("Collecting friends of " + userID);
 
@@ -108,22 +123,15 @@ public class RetrieveFriends {
 				outQueue.newLine();
 			}
 			
+			outQueue.close();
+			outEdge.close();
+			
 			System.out.println("Process complete.");
 			
 		} catch (TwitterException e) {
 			e.printStackTrace();
 		} catch (IOException e1) {
 			e1.printStackTrace();
-		}
-		finally {
-			//close streams
-			try {
-				outQueue.close();
-				outEdge.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			
 		}
 	}
 }
