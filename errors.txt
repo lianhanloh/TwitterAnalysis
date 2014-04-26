@@ -1270,3 +1270,15 @@ Caused by: java.lang.NumberFormatException: For input string: "<<<<<<< HEAD"
 	at java.lang.Long.parseLong(Long.java:483)
 	at retrieval.RetrieveFriends.main(RetrieveFriends.java:54)
 	... 5 more
+Exception in thread "main" java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader.main(JarRsrcLoader.java:58)
+Caused by: java.lang.NumberFormatException: For input string: "<<<<<<<"
+	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
+	at java.lang.Long.parseLong(Long.java:441)
+	at java.lang.Long.parseLong(Long.java:483)
+	at retrieval.RetrieveFriends.main(RetrieveFriends.java:66)
+	... 5 more
