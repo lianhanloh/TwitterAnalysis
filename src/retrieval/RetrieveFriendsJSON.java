@@ -23,21 +23,16 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.JsonPrimitive;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonToken;
-import com.google.gson.stream.JsonWriter;
-import com.google.gson.JsonElement;
 
 import twitter4j.HashtagEntity;
 import twitter4j.IDs;
 import twitter4j.JSONArray;
+import twitter4j.JSONException;
+import twitter4j.JSONObject;
 import twitter4j.ResponseList;
 import twitter4j.Status;
 import twitter4j.Twitter;
@@ -53,7 +48,6 @@ public class RetrieveFriendsJSON {
 	public static void main(String[] args) {
 		BufferedReader in = null;
 		BufferedWriter outQueue = null;
-		JsonParser parser = new JsonParser();
 
 		//used so that users are not duplicated in queue
 		ArrayList<Long> currentQueue = new ArrayList<Long>();
@@ -71,29 +65,44 @@ public class RetrieveFriendsJSON {
 				userID = currentQueue.get(0);
 			}
 			in.close();
+			
+			System.out.println("Getting followers and following for " + userID);
 
 			HashSet<Long> allNodes = new HashSet<Long>();
 
+			JSONParser parser = new JSONParser();
 			FileReader file = new FileReader(JSON_FILE);
-			Object obj = parser.parse(file);
-			JsonObject json = (JsonObject) obj;
+			
+			JSONObject json = null;
+			//if JSON file is empty
+			if (file.read() == -1) {
+				json = new JSONObject();
+			}
+			//read from existing JSON file
+			else {
+				Object obj = parser.parse(file);
+				json = (JSONObject) obj;
+			}
+			
+			Iterator it = json.keys();
 
-			Set<Entry<String, JsonElement>> set = json.entrySet();
-			Iterator<Entry<String, JsonElement>> it = set.iterator();
+//			Set<Entry<String, JsonElement>> set = json.entrySet();
+//			Iterator<Entry<String, JsonElement>> it = set.iterator();
 			while (it.hasNext()) {
-				Entry<String, JsonElement> entry = it.next();
-				allNodes.add(Long.parseLong(entry.getKey()));
+				String id = (String) it.next();
+				allNodes.add(Long.parseLong(id));
+//				Entry entry = it.next();
 			}
 
 			Twitter twitter = new TwitterFactory().getInstance();
-			JsonObject newUser = new JsonObject();
-			JsonArray followingJSON = new JsonArray();
+			JSONObject newUser = new JSONObject();
+			JSONArray followingJSON = new JSONArray();
 
 			//get friends' (following) IDs and add to edge list and queue
 			IDs ids = twitter.getFriendsIDs(userID, -1);
 			long[] following = ids.getIDs();
 			for (long x: following) {
-				followingJSON.add(new JsonPrimitive(x));
+				followingJSON.put(x);
 
 				//if not already in queue
 				if (!allNodes.contains(x) && !currentQueue.contains(x)) {
@@ -104,23 +113,26 @@ public class RetrieveFriendsJSON {
 
 			//get followers, add to queue and print to edge list
 			IDs followerIDs = twitter.getFollowersIDs(userID, -1);
-			JsonArray followersJSON = new JsonArray();
+			JSONArray followersJSON = new JSONArray();
 			long[] followers = followerIDs.getIDs();
 			for (long x: followers) {
-				followersJSON.add(new JsonPrimitive(x));
+				followersJSON.put(x);
 				
 				if (!allNodes.contains(x) && !currentQueue.contains(x)) {
 					currentQueue.add(x);
 				}
 			}
 			
-			newUser.add("following", followingJSON);
-			newUser.add("followers", followersJSON);
+			newUser.put("following", followingJSON);
+			newUser.put("followers", followersJSON);
 			
-			json.add(Long.toString(userID), newUser);
+			json.put(Long.toString(userID), newUser);
+			
+//			Gson gson = new GsonBuilder().setPrettyPrinting().create();
+//			String output = gson.fromJson(json, JsonObject.class);
 			
 			FileWriter out = new FileWriter(JSON_FILE);
-			out.write(json.toString());
+			out.write(json.toString(1));
 			out.flush();
 			out.close();
 			
@@ -144,6 +156,12 @@ public class RetrieveFriendsJSON {
 		catch (IOException e) {
 			e.printStackTrace();
 		} catch (TwitterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
