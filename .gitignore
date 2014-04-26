@@ -15,8 +15,6 @@ hs_err_pid*
 *.classpath
 *.project
 /bin/
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 # .tsv files are too big
 *.tsv
