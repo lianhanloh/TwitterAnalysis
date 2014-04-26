@@ -1,6 +1,7 @@
 package retrieval;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -27,6 +28,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.JsonPrimitive;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
@@ -50,7 +52,7 @@ public class RetrieveFriendsJSON {
 
 	public static void main(String[] args) {
 		BufferedReader in = null;
-		BufferedReader inQueue = null;
+		BufferedWriter outQueue = null;
 		JsonParser parser = new JsonParser();
 
 		//used so that users are not duplicated in queue
@@ -69,11 +71,7 @@ public class RetrieveFriendsJSON {
 				userID = currentQueue.get(0);
 			}
 			in.close();
-			//			InputStream is = new FileInputStream(JSON_FILE);
-			//			InputStreamReader isr = new InputStreamReader(is);
-			//
-			//			//create JsonReader object
-			//			JsonReader reader = new JsonReader(isr);
+
 			HashSet<Long> allNodes = new HashSet<Long>();
 
 			FileReader file = new FileReader(JSON_FILE);
@@ -88,11 +86,14 @@ public class RetrieveFriendsJSON {
 			}
 
 			Twitter twitter = new TwitterFactory().getInstance();
+			JsonObject newUser = new JsonObject();
+			JsonArray followingJSON = new JsonArray();
 
 			//get friends' (following) IDs and add to edge list and queue
 			IDs ids = twitter.getFriendsIDs(userID, -1);
 			long[] following = ids.getIDs();
 			for (long x: following) {
+				followingJSON.add(new JsonPrimitive(x));
 
 				//if not already in queue
 				if (!allNodes.contains(x) && !currentQueue.contains(x)) {
@@ -103,55 +104,41 @@ public class RetrieveFriendsJSON {
 
 			//get followers, add to queue and print to edge list
 			IDs followerIDs = twitter.getFollowersIDs(userID, -1);
+			JsonArray followersJSON = new JsonArray();
 			long[] followers = followerIDs.getIDs();
-			JsonArray followerJSON = (JsonArray) followers;//new JsonArray();
 			for (long x: followers) {
+				followersJSON.add(new JsonPrimitive(x));
+				
 				if (!allNodes.contains(x) && !currentQueue.contains(x)) {
 					currentQueue.add(x);
 				}
-				followerJSON.add(JsonElement) x);
 			}
 			
-			JsonObject newUser = new JsonObject();
+			newUser.add("following", followingJSON);
+			newUser.add("followers", followersJSON);
 			
+			json.add(Long.toString(userID), newUser);
 			
-			newUser.add("following", followerIDs);
+			FileWriter out = new FileWriter(JSON_FILE);
+			out.write(json.toString());
+			out.flush();
+			out.close();
+			
+			//writer for printing the queue
+			outQueue = 
+					new BufferedWriter(new FileWriter(QUEUE));
 
-			File file2 = new File(JSON_FILE);
-			OutputStreamWriter out = 
-					new OutputStreamWriter(new FileOutputStream(file2));
-			JsonWriter writer = new JsonWriter(out);
-			writer.setIndent("\t");
+			
+			//print queue into text file
+			if (currentQueue.size() > 0) {
+				currentQueue.remove(userID);
+			}
+			for (long x: currentQueue) {
+				outQueue.write(Long.toString(x));
+				outQueue.newLine();
+			}
+			outQueue.close();
 
-			writer.beginObject();
-			writer.name("USERID");
-
-			//inside this user
-			writer.beginObject();
-
-			//following
-			writer.name("following").beginArray();
-			for (long id: following)
-				writer.value(id);
-			writer.endArray();
-
-			//followers
-			writer.name("followers").beginArray();
-			for (long id: followers)
-				writer.value(id);
-			writer.endArray();
-
-			writer.endObject();
-
-			//new user
-			writer.name("1234567");
-			writer.beginObject();
-			writer.name("location").value("Hong Kong");
-
-			writer.endObject();
-			writer.endObject();
-			writer.flush();
-			writer.close();
 
 		}
 		catch (IOException e) {
