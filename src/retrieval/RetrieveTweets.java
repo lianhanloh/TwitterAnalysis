@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.FileWriter;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.apache.commons.io.IOUtils;
@@ -23,19 +24,20 @@ import twitter4j.TwitterFactory;
 
 /**
  * 
- * This program retrieves tweets from Twitter using the twitter4j API,
- * then stores it in a JSON file
+ * Retrieves tweets of a particular user, and stores it in a json file
  * 
- * @author natchan and lianhanloh
+ * @author Nathaniel Chan and lianhanloh
  *
  */
 public class RetrieveTweets {
 
-	//node list acts as a queue, of which nodes whose tweets need to be
-	//pulled
-	private static final String USER_JSON = "adjacencyListTest.json";
-	private static final String NODE_LIST = "nodeListTest.txt";
-	private static final String JSON_FILE = "userTweetsTest.json";
+	//will not overwrite the original adjacency list json file
+	private static final String ORIGINAL_JSON_FILE = "adjacencyList.json";
+	
+	//node list is initially a list of all the nodes, but then acts as a queue
+	//as the program is run
+	private static final String NODE_LIST = "nodeList.txt";
+	private static final String USER_JSON = "userTweets.json";
 
 	public static void main(String[] args) {
 		BufferedReader in = null;
@@ -48,7 +50,8 @@ public class RetrieveTweets {
 
 			//if running for first time, no tweets have been pulled yet
 			if (in.read() == -1) {
-				InputStream is = new FileInputStream(JSON_FILE);
+				//get JSON file from adjacency list
+				InputStream is = new FileInputStream(ORIGINAL_JSON_FILE);
 				String jsonTxt = IOUtils.toString(is);
 
 				json = new JSONObject(jsonTxt);
@@ -66,28 +69,43 @@ public class RetrieveTweets {
 					outNodes.newLine();
 				}
 				outNodes.close();
+				in.close();
 			}
 			
 			//already existing json file for tweets
 			else {
 				in.close();
+				ArrayList<String> users = new ArrayList<String>();
 				in = new BufferedReader(new FileReader(NODE_LIST));
 				//get user ID
 				userID = Long.parseLong(in.readLine().trim());
 				
 				//remove user from queue
-				BufferedWriter out = new BufferedWriter(new FileWriter(NODE_LIST));
 				String line = null;
 				while ((line = in.readLine()) != null) {
-					out.write(line);
+					users.add(line.trim());
+				}
+				in.close();
+				
+				//write new queue to node list
+				BufferedWriter out = new BufferedWriter(new FileWriter(NODE_LIST));
+				for (String x: users) {
+					out.write(x);
 					out.newLine();
 				}
+				out.close();
 				
+				//get JSON file and make JSON object
 				InputStream is = new FileInputStream(USER_JSON);
 				String jsonTxt = IOUtils.toString(is);
+				is.close();
 
 				json = new JSONObject(jsonTxt);
 			}
+			
+			//get user from json object
+			JSONObject currentUser = json.getJSONObject(Long.toString(userID));
+			System.out.println("Getting tweets for:" + userID);
 			
 			Twitter twitter = new TwitterFactory().getInstance();
 			ResponseList<Status> statuses = 
@@ -106,13 +124,17 @@ public class RetrieveTweets {
 				}
 			}
 			
-			//put tweets and hashtags into json
-			json.put(Long.toString(userID), tweets);
-			json.put(Long.toString(userID), hashtags);
+			//put tweets and hashtags into user json object
+			currentUser.put("tweets", tweets);
+			currentUser.put("hashtags", hashtags);
 			
+			//put user back into greater json object
+			json.put(Long.toString(userID), currentUser);
+			
+			//write the json object to file
 			int indentFactor = 1;
 			String prettyprintedJSON = json.toString(indentFactor);
-			FileWriter out = new FileWriter(JSON_FILE);
+			FileWriter out = new FileWriter(USER_JSON);
 			out.write(prettyprintedJSON);
 			out.flush();
 			out.close();
@@ -125,7 +147,6 @@ public class RetrieveTweets {
 		} catch (TwitterException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 }
