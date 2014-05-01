@@ -21,3 +21,7 @@ hs_err_pid*
 
 # ignore the stanford NLP library because it's too big for github
 lib/stanford*
+
+# ignore twitter4j.properties file
+src/twitter4j.properties
+bin/twitter4j.properties
