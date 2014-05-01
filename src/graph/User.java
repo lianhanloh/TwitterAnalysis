@@ -40,6 +40,10 @@ public class User {
         this.followers = followers;
     }
     
+    public boolean isConnectedTo(User user) {
+    	return followers.contains(user) || following.contains(user);
+    }
+    
     
     @Override
     public boolean equals(Object obj) {
