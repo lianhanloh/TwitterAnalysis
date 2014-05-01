@@ -37,6 +37,7 @@ public class GetUserNumber {
 
 			JSONObject json = new JSONObject(jsonTxt);
 
+			@SuppressWarnings("rawtypes")
 			Iterator it = json.keys();
 
 			while (it.hasNext()) {

@@ -56,6 +56,7 @@ public class RetrieveTweets {
 
 				json = new JSONObject(jsonTxt);
 
+				@SuppressWarnings("rawtypes")
 				Iterator it = json.keys();
 
 				//writer for printing the queue
