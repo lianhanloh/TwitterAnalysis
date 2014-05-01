@@ -1,14 +1,18 @@
 package retrieval;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.FileWriter;
+import java.io.InputStream;
+import java.util.Iterator;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import org.apache.commons.io.IOUtils;
 
+import twitter4j.JSONException;
+import twitter4j.JSONObject;
 import twitter4j.HashtagEntity;
 import twitter4j.JSONArray;
 import twitter4j.ResponseList;
@@ -29,75 +33,97 @@ public class RetrieveTweets {
 
 	//node list acts as a queue, of which nodes whose tweets need to be
 	//pulled
-	private static final String NODE_LIST = "nodeList.txt";
-	private static final String JSON_FILE = "userTweets.json";
+	private static final String USER_JSON = "adjacencyListTest.json";
+	private static final String NODE_LIST = "nodeListTest.txt";
+	private static final String JSON_FILE = "userTweetsTest.json";
 
-	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
 		BufferedReader in = null;
-		JSONParser parser = new JSONParser();
+
 		try {
 			in = new BufferedReader(new FileReader(NODE_LIST));
-			String user = in.readLine();
 
-			if (user != null && !user.equals("")) {
-				long userID = Long.parseLong(user);
-				Twitter twitter = new TwitterFactory().getInstance();
-				ResponseList<Status> statuses = 
-						twitter.getUserTimeline(userID);
+			JSONObject json = null;
+			long userID = 0;
 
-				JSONArray tweets = new JSONArray();
-				JSONArray hashtags = new JSONArray();
+			//if running for first time, no tweets have been pulled yet
+			if (in.read() == -1) {
+				InputStream is = new FileInputStream(JSON_FILE);
+				String jsonTxt = IOUtils.toString(is);
 
-				//get all tweets and hashtags
-				for (Status s: statuses) {
-					tweets.put(s.getText());
+				json = new JSONObject(jsonTxt);
 
-					//get all the hashtags associated
-					for (HashtagEntity tag: s.getHashtagEntities()) {
-						hashtags.put(tag.getText());
-					}
+				Iterator it = json.keys();
+
+				//writer for printing the queue
+				BufferedWriter outNodes = 
+						new BufferedWriter(new FileWriter(NODE_LIST));
+
+				//take the first node to pull tweets for
+				userID = Long.parseLong((String) it.next());
+				while (it.hasNext()) {
+					outNodes.write((String) it.next());
+					outNodes.newLine();
 				}
-
-				FileReader file = new FileReader(JSON_FILE);
-				JSONObject json = null;
-				//if JSON file is empty
-				if (file.read() == -1) {
-					json = new JSONObject();
-				}
-				//read from existing JSON file
-				else {
-					Object obj = parser.parse(file);
-					json = (JSONObject) obj;
+				outNodes.close();
+			}
+			
+			//already existing json file for tweets
+			else {
+				in.close();
+				in = new BufferedReader(new FileReader(NODE_LIST));
+				//get user ID
+				userID = Long.parseLong(in.readLine().trim());
+				
+				//remove user from queue
+				BufferedWriter out = new BufferedWriter(new FileWriter(NODE_LIST));
+				String line = null;
+				while ((line = in.readLine()) != null) {
+					out.write(line);
+					out.newLine();
 				}
 				
-				//put tweets and hashtags into json
-				json.put(user, tweets);
-				json.put(user, hashtags);
+				InputStream is = new FileInputStream(USER_JSON);
+				String jsonTxt = IOUtils.toString(is);
 
-				FileWriter out = new FileWriter(JSON_FILE);
-				out.write(json.toString());
-				out.flush();
-				out.close();
-
-				System.out.println(json);
+				json = new JSONObject(jsonTxt);
 			}
+			
+			Twitter twitter = new TwitterFactory().getInstance();
+			ResponseList<Status> statuses = 
+					twitter.getUserTimeline(userID);
 
+			JSONArray tweets = new JSONArray();
+			JSONArray hashtags = new JSONArray();
 
+			//get all tweets and hashtags
+			for (Status s: statuses) {
+				tweets.put(s.getText());
 
-		} catch (IOException e) {
+				//get all the hashtags associated
+				for (HashtagEntity tag: s.getHashtagEntities()) {
+					hashtags.put(tag.getText());
+				}
+			}
+			
+			//put tweets and hashtags into json
+			json.put(Long.toString(userID), tweets);
+			json.put(Long.toString(userID), hashtags);
+			
+			int indentFactor = 1;
+			String prettyprintedJSON = json.toString(indentFactor);
+			FileWriter out = new FileWriter(JSON_FILE);
+			out.write(prettyprintedJSON);
+			out.flush();
+			out.close();
+		}
+		
+		catch (IOException e) {
 			e.printStackTrace();
-		} catch (ParseException e) {
+		} catch (JSONException e) {
 			e.printStackTrace();
 		} catch (TwitterException e) {
 			e.printStackTrace();
-		}
-		finally {
-			try {
-				in.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 		}
 
 	}
