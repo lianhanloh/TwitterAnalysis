@@ -108,7 +108,6 @@ public class RetrieveFriendsJSON {
 				if (!allNodes.contains(x) && !currentQueue.contains(x)) {
 					currentQueue.add(x);
 				}
-
 			}
 
 			//get followers, add to queue and print to edge list
