@@ -43,7 +43,6 @@ public class RetrieveFriendsJSON {
 			}
 			//get friends of head of queue
 			long userID = START_ID;
-			System.out.println(currentQueue.size());
 			if (currentQueue.size() != 0) {
 				userID = currentQueue.get(0);
 			}
