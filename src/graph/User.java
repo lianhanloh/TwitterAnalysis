@@ -1,6 +1,6 @@
 package graph;
 
-import java.util.Set;
+import java.util.HashSet;
 
 /**
  * This class represents a twitter user
@@ -13,30 +13,30 @@ public class User {
 
     /** class fields */
     private final long id;
-    private Set<User> followers;
-    private Set<User> following;
+    private HashSet<User> followers;
+    private HashSet<User> following;
     
     public User(long id) {
         this.id = id;
     }
     
     /** returns the set of users this user follows */
-    public Set<User> getFollowing () {
+    public HashSet<User> getFollowing () {
         return following;
     }
     
     /** returns the set of users following this user */
-    public Set<User> getFollowers() {
+    public HashSet<User> getFollowers() {
         return followers;
     }
 
     /** assigns to a user the set of users he/she follows */
-    public void setFollowing(Set<User> following) {
+    public void setFollowing(HashSet<User> following) {
         this.following = following;
     }
     
     /** assigns to a user the set of users who follow him/her */
-    public void setFollowers(Set<User> followers) {
+    public void setFollowers(HashSet<User> followers) {
         this.followers = followers;
     }
     

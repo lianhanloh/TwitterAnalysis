@@ -52,6 +52,7 @@ public class RetrieveFriendsJSON {
 
 			HashSet<Long> allNodes = new HashSet<Long>();
 
+			@SuppressWarnings("resource")
 			FileReader file = new FileReader(JSON_FILE);
 
 			JSONObject json = null;
@@ -66,6 +67,7 @@ public class RetrieveFriendsJSON {
 
 				json = new JSONObject(jsonTxt);
 
+				@SuppressWarnings("rawtypes")
 				Iterator it = json.keys();
 				
 				while (it.hasNext()) {
