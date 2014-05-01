@@ -10,6 +10,7 @@ import java.util.Set;
 
 import org.apache.commons.io.IOUtils;
 
+import twitter4j.JSONArray;
 import twitter4j.JSONException;
 import twitter4j.JSONObject;
 
@@ -26,6 +27,7 @@ public class Graph {
     /** class fields */
     private static final String JSON_FILE = "adjacencyList.json";
     private static Set<User> allUsers = new HashSet<User>();
+    private static final int FOLLOWERS = 0;
     
     public Graph() {
 
@@ -44,7 +46,8 @@ public class Graph {
                 User user = new User(id);
                 HashSet<User> following = new HashSet<User>();
                 HashSet<User> followers = new HashSet<User>();
-//                JSONArray followersJSON = 
+                JSONArray userJSON = json.getJSONArray(id_string);
+                JSONArray followersJSON = userJSON.getJSONArray(FOLLOWERS);
                 System.out.println("Twitter user " + i++ + " : " + id);
                 
                 allUsers.add(user);

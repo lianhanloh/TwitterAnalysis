@@ -23,9 +23,9 @@ import twitter4j.TwitterFactory;
 
 public class RetrieveFriendsJSON {
 
-	private static final String JSON_FILE = "adjacencyList.json";
-	private static final String QUEUE = "queue.txt";
-	private static final long START_ID = 17461978;
+	private static final String JSON_FILE = "adjacencyList_lh.json";
+	private static final String QUEUE = "queue_lh.txt";
+	private static final long START_ID = 12; // Jack Dorsey
 
 	public static void main(String[] args) {
 		BufferedReader in = null;
@@ -43,6 +43,7 @@ public class RetrieveFriendsJSON {
 			}
 			//get friends of head of queue
 			long userID = START_ID;
+			System.out.println(currentQueue.size());
 			if (currentQueue.size() != 0) {
 				userID = currentQueue.get(0);
 			}
