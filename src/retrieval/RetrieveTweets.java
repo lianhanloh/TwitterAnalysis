@@ -1,14 +1,19 @@
 package retrieval;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.FileWriter;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Iterator;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import org.apache.commons.io.IOUtils;
 
+import twitter4j.JSONException;
+import twitter4j.JSONObject;
 import twitter4j.HashtagEntity;
 import twitter4j.JSONArray;
 import twitter4j.ResponseList;
@@ -19,87 +24,130 @@ import twitter4j.TwitterFactory;
 
 /**
  * 
- * This program retrieves tweets from Twitter using the twitter4j API,
- * then stores it in a JSON file
+ * Retrieves tweets of a particular user, and stores it in a json file
  * 
- * @author natchan and lianhanloh
+ * @author Nathaniel Chan and lianhanloh
  *
  */
 public class RetrieveTweets {
 
-	//node list acts as a queue, of which nodes whose tweets need to be
-	//pulled
+	//will not overwrite the original adjacency list json file
+	private static final String ORIGINAL_JSON_FILE = "adjacencyList.json";
+	
+	//node list is initially a list of all the nodes, but then acts as a queue
+	//as the program is run
 	private static final String NODE_LIST = "nodeList.txt";
-	private static final String JSON_FILE = "userTweets.json";
+	private static final String USER_JSON = "userTweets.json";
 
-	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
 		BufferedReader in = null;
-		JSONParser parser = new JSONParser();
+
 		try {
 			in = new BufferedReader(new FileReader(NODE_LIST));
-			String user = in.readLine();
 
-			if (user != null && !user.equals("")) {
-				long userID = Long.parseLong(user);
-				Twitter twitter = new TwitterFactory().getInstance();
-				ResponseList<Status> statuses = 
-						twitter.getUserTimeline(userID);
+			JSONObject json = null;
+			long userID = 0;
 
-				JSONArray tweets = new JSONArray();
-				JSONArray hashtags = new JSONArray();
+			//if running for first time, no tweets have been pulled yet
+			if (in.read() == -1) {
+				//get JSON file from adjacency list
+				InputStream is = new FileInputStream(ORIGINAL_JSON_FILE);
+				String jsonTxt = IOUtils.toString(is);
 
-				//get all tweets and hashtags
-				for (Status s: statuses) {
-					tweets.put(s.getText());
+				json = new JSONObject(jsonTxt);
 
-					//get all the hashtags associated
-					for (HashtagEntity tag: s.getHashtagEntities()) {
-						hashtags.put(tag.getText());
-					}
+				@SuppressWarnings("rawtypes")
+				Iterator it = json.keys();
+
+				//writer for printing the queue
+				BufferedWriter outNodes = 
+						new BufferedWriter(new FileWriter(NODE_LIST));
+
+				//take the first node to pull tweets for
+				userID = Long.parseLong((String) it.next());
+				while (it.hasNext()) {
+					outNodes.write((String) it.next());
+					outNodes.newLine();
 				}
-
-				FileReader file = new FileReader(JSON_FILE);
-				JSONObject json = null;
-				//if JSON file is empty
-				if (file.read() == -1) {
-					json = new JSONObject();
-				}
-				//read from existing JSON file
-				else {
-					Object obj = parser.parse(file);
-					json = (JSONObject) obj;
-				}
-				
-				//put tweets and hashtags into json
-				json.put(user, tweets);
-				json.put(user, hashtags);
-
-				FileWriter out = new FileWriter(JSON_FILE);
-				out.write(json.toString());
-				out.flush();
-				out.close();
-
-				System.out.println(json);
+				outNodes.close();
+				in.close();
 			}
+			
+			//already existing json file for tweets
+			else {
+				in.close();
+				ArrayList<String> users = new ArrayList<String>();
+				in = new BufferedReader(new FileReader(NODE_LIST));
+				//get user ID
+				userID = Long.parseLong(in.readLine().trim());
+				
+				//remove user from queue
+				String line = null;
+				while ((line = in.readLine()) != null) {
+					users.add(line.trim());
+				}
+				in.close();
+				
+				//write new queue to node list
+				BufferedWriter out = new BufferedWriter(new FileWriter(NODE_LIST));
+				for (String x: users) {
+					out.write(x);
+					out.newLine();
+				}
+				out.close();
+				
+				//get JSON file and make JSON object
+				InputStream is = new FileInputStream(USER_JSON);
+				String jsonTxt = IOUtils.toString(is);
+				is.close();
 
+				json = new JSONObject(jsonTxt);
+			}
+			
+			//get user from json object
+			JSONObject currentUser = json.getJSONObject(Long.toString(userID));
+			System.out.println("Getting tweets for:" + userID);
+			
+			Twitter twitter = new TwitterFactory().getInstance();
+			ResponseList<Status> statuses = 
+					twitter.getUserTimeline(userID);
 
+			JSONArray tweets = new JSONArray();
+			JSONArray hashtags = new JSONArray();
 
-		} catch (IOException e) {
+			//get all tweets and hashtags
+			for (Status s: statuses) {
+				tweets.put(s.getText());
+
+				//get all the hashtags associated
+				for (HashtagEntity tag: s.getHashtagEntities()) {
+					hashtags.put(tag.getText());
+				}
+			}
+			
+			//put tweets and hashtags into user json object
+			currentUser.put("tweets", tweets);
+			currentUser.put("hashtags", hashtags);
+			
+			//put user back into greater json object
+			json.put(Long.toString(userID), currentUser);
+			
+			//write the json object to file
+			int indentFactor = 1;
+			String prettyprintedJSON = json.toString(indentFactor);
+			FileWriter out = new FileWriter(USER_JSON);
+			out.write(prettyprintedJSON);
+			out.flush();
+			out.close();
+		}
+		
+		catch (IOException e) {
 			e.printStackTrace();
-		} catch (ParseException e) {
+		} catch (JSONException e) {
 			e.printStackTrace();
 		} catch (TwitterException e) {
 			e.printStackTrace();
 		}
-		finally {
-			try {
-				in.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-
 	}
 
 }
