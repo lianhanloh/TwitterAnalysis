@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 import org.apache.commons.io.IOUtils;
 
@@ -20,12 +21,13 @@ import twitter4j.JSONObject;
  *
  */
 
-public class PopulateGraph {
+public class Graph {
     
     /** class fields */
     private static final String JSON_FILE = "adjacencyList.json";
+    private static Set<User> allUsers = new HashSet<User>();
     
-    public static void main(String[] args) {
+    public Graph() {
 
         // open and read json file
         try {
@@ -41,7 +43,11 @@ public class PopulateGraph {
                 long id = Long.parseLong(id_string);
                 User user = new User(id);
                 HashSet<User> following = new HashSet<User>();
+                HashSet<User> followers = new HashSet<User>();
+//                JSONArray followersJSON = 
                 System.out.println("Twitter user " + i++ + " : " + id);
+                
+                allUsers.add(user);
             }
        
             is.close();
@@ -59,6 +65,11 @@ public class PopulateGraph {
             e.printStackTrace();
         }
 
+    }
+    
+    /** returns all the users */
+    public Set<User> getGraph() {
+        return allUsers;
     }
 
 
