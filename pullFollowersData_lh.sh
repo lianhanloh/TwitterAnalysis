@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# this script runs the .jar to retrieve the next set of followers and following
+
+cd ~/Documents/nets150/TweetAnalysis
+java -jar retrieveFriends.jar 2>> errors_lh.txt
+cur=$(cat count.txt | tail -1)
+echo $((cur + 1)) > count.txt
