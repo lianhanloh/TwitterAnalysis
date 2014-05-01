@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Set;
 
 import org.apache.commons.io.IOUtils;
 
@@ -41,7 +40,7 @@ public class PopulateGraph {
                 String id_string = (String) it.next();
                 long id = Long.parseLong(id_string);
                 User user = new User(id);
-                Set<User> following = new HashSet<User>();
+                HashSet<User> following = new HashSet<User>();
                 System.out.println("Twitter user " + i++ + " : " + id);
             }
        
