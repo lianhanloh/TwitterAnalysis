@@ -33,14 +33,16 @@ public class Graph {
 
         // open and read json file
         try {
-            InputStream is = new FileInputStream(JSON_FILE);
-            String jsonTxt = IOUtils.toString(is);
-            populateGraph(jsonTxt);
-            is.close();
-            is = new FileInputStream(JSON_FILE_LH);
-            jsonTxt = IOUtils.toString(is);
-            populateGraph(jsonTxt);
-            is.close();
+            InputStream isOne = new FileInputStream(JSON_FILE);
+            String jsonTxtOne = IOUtils.toString(isOne);
+            InputStream isTwo = new FileInputStream(JSON_FILE_LH);
+            String jsonTxtTwo = IOUtils.toString(isTwo);
+            addUsers(jsonTxtOne);
+            addUsers(jsonTxtTwo);
+            addEdges(jsonTxtOne);
+            addEdges(jsonTxtTwo);
+            isOne.close();
+            isOne.close();
         } catch (FileNotFoundException e) {
             System.out.println("Internal error: " 
                     + e.getMessage());
@@ -57,11 +59,10 @@ public class Graph {
     }
 
     /**
-     * given a json text string, parses the information and populates graph
-     * @param jsonTxt
-     * @throws JSONException
+     * populates graph by adding followers and following sets only if they
+     * are in the set of all users
      */
-    private void populateGraph(String jsonTxt) throws JSONException {
+    private void addEdges(String jsonTxt) throws JSONException {
         JSONObject json = new JSONObject(jsonTxt);
         @SuppressWarnings("rawtypes")
         Iterator it = json.keys();
@@ -78,7 +79,10 @@ public class Graph {
             // get followers and add to hash set
             int numFollowers = followersJSON.length();
             for (int j = 0; j < numFollowers; j++) {
-                User follower = new User(followersJSON.getLong(j));
+                User follower = new User(followersJSON.getInt(j));
+                if (!allUsers.contains(follower)) {
+                    continue;
+                }
                 if (!followers.add(follower) ) {
                     throw new RuntimeException("Repeat followers at user "
                             + id + ": " + "follower number: " + j);
@@ -89,13 +93,34 @@ public class Graph {
             JSONArray followingJSON = userJSON.getJSONArray("following");
             int numFollowing = followingJSON.length();
             for (int j = 0; j < numFollowing; j++) {
-                User friend = new User(followingJSON.getLong(j));
+                User friend = new User(followingJSON.getInt(j));
+                if (!allUsers.contains(friend)) {
+                    continue;
+                }
                 if (!following.add(friend) ) {
                     throw new RuntimeException("Repeat friend at user "
                             + id + ": " + "friend number: " + j);
                 }
             }
             user.setFollowing(following);
+            // add to set of users
+            allUsers.add(user);
+        }
+    }
+
+    /**
+     * given a JSON string, adds all the user ids (keys) to the set of all users
+     */
+    private void addUsers(String jsonTxt) throws JSONException {
+
+        JSONObject json = new JSONObject(jsonTxt);
+        @SuppressWarnings("rawtypes")
+        Iterator it = json.keys();
+
+        while (it.hasNext()) {
+            String id_string = (String) it.next();
+            long id = Long.parseLong(id_string);
+            User user = new User(id);
             // add to set of users
             allUsers.add(user);
         }
