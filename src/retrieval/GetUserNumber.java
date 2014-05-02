@@ -15,8 +15,8 @@ import twitter4j.JSONException;
 import twitter4j.JSONObject;
 
 public class GetUserNumber {
-	private static final String JSON_FILE = "adjacencyList.json";
-	private static final String QUEUE = "queue.txt";
+	private static final String JSON_FILE = "adjacencyList_lh.json";
+	private static final String QUEUE = "queue_lh.txt";
 
 	public static void main(String[] args) {
 		try {

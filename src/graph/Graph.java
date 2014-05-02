@@ -27,7 +27,6 @@ public class Graph {
     /** class fields */
     private static final String JSON_FILE = "adjacencyList.json";
     private static Set<User> allUsers = new HashSet<User>();
-    private static final int FOLLOWERS = 0;
     
     public Graph() {
 
@@ -46,10 +45,31 @@ public class Graph {
                 User user = new User(id);
                 HashSet<User> following = new HashSet<User>();
                 HashSet<User> followers = new HashSet<User>();
-                JSONArray userJSON = json.getJSONArray(id_string);
-                JSONArray followersJSON = userJSON.getJSONArray(FOLLOWERS);
-                System.out.println("Twitter user " + i++ + " : " + id);
-                
+                // get user's json object
+                JSONObject userJSON = json.getJSONObject(id_string);
+                JSONArray followersJSON = userJSON.getJSONArray("followers");
+                // get followers and add to hash set
+                int numFollowers = followersJSON.length();
+                for (int j = 0; j < numFollowers; j++) {
+                    User follower = new User(followersJSON.getLong(j));
+                    if (!followers.add(follower) ) {
+                        throw new RuntimeException("Repeat followers at user "
+                                + id + ": " + "follower number: " + j);
+                    }
+                }
+                user.setFollowers(followers);
+                // get following and set to hash set
+                JSONArray followingJSON = userJSON.getJSONArray("following");
+                int numFollowing = followingJSON.length();
+                for (int j = 0; j < numFollowing; j++) {
+                    User friend = new User(followingJSON.getLong(j));
+                    if (!following.add(friend) ) {
+                        throw new RuntimeException("Repeat friend at user "
+                                + id + ": " + "friend number: " + j);
+                    }
+                }
+                user.setFollowing(following);
+                // add to set of users
                 allUsers.add(user);
             }
        
@@ -75,5 +95,8 @@ public class Graph {
         return allUsers;
     }
 
+    public static void main(String[] args) {
+        Graph graph = new Graph();
+    }
 
 }
