@@ -1,0 +1,367 @@
+401:Authentication credentials (https://dev.twitter.com/pages/auth) were missing or incorrect. Ensure that you have set valid consumer key/secret, access token/secret, and the system clock is in sync.
+{"request":"\/1.1\/friends\/ids.json?user_id=13025282&cursor=-1&include_entities=true","error":"Not authorized."}
+
+Relevant discussions can be found on the Internet at:
+	http://www.google.co.jp/search?q=a0c96a69 or
+	http://www.google.co.jp/search?q=1935c143
+TwitterException{exceptionCode=[a0c96a69-1935c143], statusCode=401, message=null, code=-1, retryAfter=-1, rateLimitStatus=RateLimitStatusJSONImpl{remaining=2, limit=15, resetTimeInSeconds=1399054144, secondsUntilReset=178}, version=4.0.1}
+	at twitter4j.HttpClientImpl.handleRequest(HttpClientImpl.java:164)
+	at twitter4j.HttpClientBase.request(HttpClientBase.java:53)
+	at twitter4j.HttpClientBase.get(HttpClientBase.java:71)
+	at twitter4j.TwitterImpl.get(TwitterImpl.java:1950)
+	at twitter4j.TwitterImpl.getFriendsIDs(TwitterImpl.java:395)
+	at retrieval.RetrieveFriendsJSON.main(RetrieveFriendsJSON.java:98)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader.main(JarRsrcLoader.java:58)
+401:Authentication credentials (https://dev.twitter.com/pages/auth) were missing or incorrect. Ensure that you have set valid consumer key/secret, access token/secret, and the system clock is in sync.
+{"request":"\/1.1\/friends\/ids.json?user_id=11513182&cursor=-1&include_entities=true","error":"Not authorized."}
+
+Relevant discussions can be found on the Internet at:
+	http://www.google.co.jp/search?q=a0c96a69 or
+	http://www.google.co.jp/search?q=1935c143
+TwitterException{exceptionCode=[a0c96a69-1935c143], statusCode=401, message=null, code=-1, retryAfter=-1, rateLimitStatus=RateLimitStatusJSONImpl{remaining=0, limit=15, resetTimeInSeconds=1399055044, secondsUntilReset=58}, version=4.0.1}
+	at twitter4j.HttpClientImpl.handleRequest(HttpClientImpl.java:164)
+	at twitter4j.HttpClientBase.request(HttpClientBase.java:53)
+	at twitter4j.HttpClientBase.get(HttpClientBase.java:71)
+	at twitter4j.TwitterImpl.get(TwitterImpl.java:1950)
+	at twitter4j.TwitterImpl.getFriendsIDs(TwitterImpl.java:395)
+	at retrieval.RetrieveFriendsJSON.main(RetrieveFriendsJSON.java:98)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader.main(JarRsrcLoader.java:58)
+401:Authentication credentials (https://dev.twitter.com/pages/auth) were missing or incorrect. Ensure that you have set valid consumer key/secret, access token/secret, and the system clock is in sync.
+{"request":"\/1.1\/friends\/ids.json?user_id=11032482&cursor=-1&include_entities=true","error":"Not authorized."}
+
+Relevant discussions can be found on the Internet at:
+	http://www.google.co.jp/search?q=a0c96a69 or
+	http://www.google.co.jp/search?q=1935c143
+TwitterException{exceptionCode=[a0c96a69-1935c143], statusCode=401, message=null, code=-1, retryAfter=-1, rateLimitStatus=RateLimitStatusJSONImpl{remaining=5, limit=15, resetTimeInSeconds=1399055944, secondsUntilReset=359}, version=4.0.1}
+	at twitter4j.HttpClientImpl.handleRequest(HttpClientImpl.java:164)
+	at twitter4j.HttpClientBase.request(HttpClientBase.java:53)
+	at twitter4j.HttpClientBase.get(HttpClientBase.java:71)
+	at twitter4j.TwitterImpl.get(TwitterImpl.java:1950)
+	at twitter4j.TwitterImpl.getFriendsIDs(TwitterImpl.java:395)
+	at retrieval.RetrieveFriendsJSON.main(RetrieveFriendsJSON.java:98)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader.main(JarRsrcLoader.java:58)
+401:Authentication credentials (https://dev.twitter.com/pages/auth) were missing or incorrect. Ensure that you have set valid consumer key/secret, access token/secret, and the system clock is in sync.
+{"request":"\/1.1\/friends\/ids.json?user_id=16009065&cursor=-1&include_entities=true","error":"Not authorized."}
+
+Relevant discussions can be found on the Internet at:
+	http://www.google.co.jp/search?q=a0c96a69 or
+	http://www.google.co.jp/search?q=1935c143
+TwitterException{exceptionCode=[a0c96a69-1935c143], statusCode=401, message=null, code=-1, retryAfter=-1, rateLimitStatus=RateLimitStatusJSONImpl{remaining=4, limit=15, resetTimeInSeconds=1399055944, secondsUntilReset=298}, version=4.0.1}
+	at twitter4j.HttpClientImpl.handleRequest(HttpClientImpl.java:164)
+	at twitter4j.HttpClientBase.request(HttpClientBase.java:53)
+	at twitter4j.HttpClientBase.get(HttpClientBase.java:71)
+	at twitter4j.TwitterImpl.get(TwitterImpl.java:1950)
+	at twitter4j.TwitterImpl.getFriendsIDs(TwitterImpl.java:395)
+	at retrieval.RetrieveFriendsJSON.main(RetrieveFriendsJSON.java:98)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader.main(JarRsrcLoader.java:58)
+401:Authentication credentials (https://dev.twitter.com/pages/auth) were missing or incorrect. Ensure that you have set valid consumer key/secret, access token/secret, and the system clock is in sync.
+{"request":"\/1.1\/friends\/ids.json?user_id=15960923&cursor=-1&include_entities=true","error":"Not authorized."}
+
+Relevant discussions can be found on the Internet at:
+	http://www.google.co.jp/search?q=a0c96a69 or
+	http://www.google.co.jp/search?q=1935c143
+TwitterException{exceptionCode=[a0c96a69-1935c143], statusCode=401, message=null, code=-1, retryAfter=-1, rateLimitStatus=RateLimitStatusJSONImpl{remaining=2, limit=15, resetTimeInSeconds=1399055944, secondsUntilReset=178}, version=4.0.1}
+	at twitter4j.HttpClientImpl.handleRequest(HttpClientImpl.java:164)
+	at twitter4j.HttpClientBase.request(HttpClientBase.java:53)
+	at twitter4j.HttpClientBase.get(HttpClientBase.java:71)
+	at twitter4j.TwitterImpl.get(TwitterImpl.java:1950)
+	at twitter4j.TwitterImpl.getFriendsIDs(TwitterImpl.java:395)
+	at retrieval.RetrieveFriendsJSON.main(RetrieveFriendsJSON.java:98)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader.main(JarRsrcLoader.java:58)
+401:Authentication credentials (https://dev.twitter.com/pages/auth) were missing or incorrect. Ensure that you have set valid consumer key/secret, access token/secret, and the system clock is in sync.
+{"request":"\/1.1\/friends\/ids.json?user_id=1481401&cursor=-1&include_entities=true","error":"Not authorized."}
+
+Relevant discussions can be found on the Internet at:
+	http://www.google.co.jp/search?q=a0c96a69 or
+	http://www.google.co.jp/search?q=1935c143
+TwitterException{exceptionCode=[a0c96a69-1935c143], statusCode=401, message=null, code=-1, retryAfter=-1, rateLimitStatus=RateLimitStatusJSONImpl{remaining=13, limit=15, resetTimeInSeconds=1399056845, secondsUntilReset=838}, version=4.0.1}
+	at twitter4j.HttpClientImpl.handleRequest(HttpClientImpl.java:164)
+	at twitter4j.HttpClientBase.request(HttpClientBase.java:53)
+	at twitter4j.HttpClientBase.get(HttpClientBase.java:71)
+	at twitter4j.TwitterImpl.get(TwitterImpl.java:1950)
+	at twitter4j.TwitterImpl.getFriendsIDs(TwitterImpl.java:395)
+	at retrieval.RetrieveFriendsJSON.main(RetrieveFriendsJSON.java:98)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader.main(JarRsrcLoader.java:58)
+401:Authentication credentials (https://dev.twitter.com/pages/auth) were missing or incorrect. Ensure that you have set valid consumer key/secret, access token/secret, and the system clock is in sync.
+{"request":"\/1.1\/friends\/ids.json?user_id=2127931&cursor=-1&include_entities=true","error":"Not authorized."}
+
+Relevant discussions can be found on the Internet at:
+	http://www.google.co.jp/search?q=a0c96a69 or
+	http://www.google.co.jp/search?q=1935c143
+TwitterException{exceptionCode=[a0c96a69-1935c143], statusCode=401, message=null, code=-1, retryAfter=-1, rateLimitStatus=RateLimitStatusJSONImpl{remaining=3, limit=15, resetTimeInSeconds=1399056845, secondsUntilReset=238}, version=4.0.1}
+	at twitter4j.HttpClientImpl.handleRequest(HttpClientImpl.java:164)
+	at twitter4j.HttpClientBase.request(HttpClientBase.java:53)
+	at twitter4j.HttpClientBase.get(HttpClientBase.java:71)
+	at twitter4j.TwitterImpl.get(TwitterImpl.java:1950)
+	at twitter4j.TwitterImpl.getFriendsIDs(TwitterImpl.java:395)
+	at retrieval.RetrieveFriendsJSON.main(RetrieveFriendsJSON.java:98)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader.main(JarRsrcLoader.java:58)
+429:Returned in API v1.1 when a request cannot be served due to the application's rate limit having been exhausted for the resource. See Rate Limiting in API v1.1.(https://dev.twitter.com/docs/rate-limiting/1.1)
+message - Rate limit exceeded
+code - 88
+
+Relevant discussions can be found on the Internet at:
+	http://www.google.co.jp/search?q=a0c96a69 or
+	http://www.google.co.jp/search?q=1935c143
+TwitterException{exceptionCode=[a0c96a69-1935c143], statusCode=429, message=Rate limit exceeded, code=88, retryAfter=-1, rateLimitStatus=RateLimitStatusJSONImpl{remaining=0, limit=15, resetTimeInSeconds=1399056845, secondsUntilReset=0}, version=4.0.1}
+	at twitter4j.HttpClientImpl.handleRequest(HttpClientImpl.java:164)
+	at twitter4j.HttpClientBase.request(HttpClientBase.java:53)
+	at twitter4j.HttpClientBase.get(HttpClientBase.java:71)
+	at twitter4j.TwitterImpl.get(TwitterImpl.java:1950)
+	at twitter4j.TwitterImpl.getFriendsIDs(TwitterImpl.java:395)
+	at retrieval.RetrieveFriendsJSON.main(RetrieveFriendsJSON.java:98)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader.main(JarRsrcLoader.java:58)
+404:The URI requested is invalid or the resource requested, such as a user, does not exists. Also returned when the requested format is not supported by the requested method.
+message - Sorry, that page does not exist
+code - 34
+
+Relevant discussions can be found on the Internet at:
+	http://www.google.co.jp/search?q=a0c96a69 or
+	http://www.google.co.jp/search?q=1935c143
+TwitterException{exceptionCode=[a0c96a69-1935c143], statusCode=404, message=Sorry, that page does not exist, code=34, retryAfter=-1, rateLimitStatus=RateLimitStatusJSONImpl{remaining=1, limit=15, resetTimeInSeconds=1399057805, secondsUntilReset=120}, version=4.0.1}
+	at twitter4j.HttpClientImpl.handleRequest(HttpClientImpl.java:164)
+	at twitter4j.HttpClientBase.request(HttpClientBase.java:53)
+	at twitter4j.HttpClientBase.get(HttpClientBase.java:71)
+	at twitter4j.TwitterImpl.get(TwitterImpl.java:1950)
+	at twitter4j.TwitterImpl.getFriendsIDs(TwitterImpl.java:395)
+	at retrieval.RetrieveFriendsJSON.main(RetrieveFriendsJSON.java:98)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader.main(JarRsrcLoader.java:58)
+401:Authentication credentials (https://dev.twitter.com/pages/auth) were missing or incorrect. Ensure that you have set valid consumer key/secret, access token/secret, and the system clock is in sync.
+{"request":"\/1.1\/friends\/ids.json?user_id=272997230&cursor=-1&include_entities=true","error":"Not authorized."}
+
+Relevant discussions can be found on the Internet at:
+	http://www.google.co.jp/search?q=a0c96a69 or
+	http://www.google.co.jp/search?q=1935c143
+TwitterException{exceptionCode=[a0c96a69-1935c143], statusCode=401, message=null, code=-1, retryAfter=-1, rateLimitStatus=RateLimitStatusJSONImpl{remaining=1, limit=15, resetTimeInSeconds=1399058705, secondsUntilReset=119}, version=4.0.1}
+	at twitter4j.HttpClientImpl.handleRequest(HttpClientImpl.java:164)
+	at twitter4j.HttpClientBase.request(HttpClientBase.java:53)
+	at twitter4j.HttpClientBase.get(HttpClientBase.java:71)
+	at twitter4j.TwitterImpl.get(TwitterImpl.java:1950)
+	at twitter4j.TwitterImpl.getFriendsIDs(TwitterImpl.java:395)
+	at retrieval.RetrieveFriendsJSON.main(RetrieveFriendsJSON.java:98)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader.main(JarRsrcLoader.java:58)
+429:Returned in API v1.1 when a request cannot be served due to the application's rate limit having been exhausted for the resource. See Rate Limiting in API v1.1.(https://dev.twitter.com/docs/rate-limiting/1.1)
+message - Rate limit exceeded
+code - 88
+
+Relevant discussions can be found on the Internet at:
+	http://www.google.co.jp/search?q=a0c96a69 or
+	http://www.google.co.jp/search?q=1935c143
+TwitterException{exceptionCode=[a0c96a69-1935c143], statusCode=429, message=Rate limit exceeded, code=88, retryAfter=-1, rateLimitStatus=RateLimitStatusJSONImpl{remaining=0, limit=15, resetTimeInSeconds=1399058705, secondsUntilReset=0}, version=4.0.1}
+	at twitter4j.HttpClientImpl.handleRequest(HttpClientImpl.java:164)
+	at twitter4j.HttpClientBase.request(HttpClientBase.java:53)
+	at twitter4j.HttpClientBase.get(HttpClientBase.java:71)
+	at twitter4j.TwitterImpl.get(TwitterImpl.java:1950)
+	at twitter4j.TwitterImpl.getFriendsIDs(TwitterImpl.java:395)
+	at retrieval.RetrieveFriendsJSON.main(RetrieveFriendsJSON.java:98)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader.main(JarRsrcLoader.java:58)
+401:Authentication credentials (https://dev.twitter.com/pages/auth) were missing or incorrect. Ensure that you have set valid consumer key/secret, access token/secret, and the system clock is in sync.
+{"request":"\/1.1\/friends\/ids.json?user_id=44022071&cursor=-1&include_entities=true","error":"Not authorized."}
+
+Relevant discussions can be found on the Internet at:
+	http://www.google.co.jp/search?q=a0c96a69 or
+	http://www.google.co.jp/search?q=1935c143
+TwitterException{exceptionCode=[a0c96a69-1935c143], statusCode=401, message=null, code=-1, retryAfter=-1, rateLimitStatus=RateLimitStatusJSONImpl{remaining=3, limit=15, resetTimeInSeconds=1399059665, secondsUntilReset=239}, version=4.0.1}
+	at twitter4j.HttpClientImpl.handleRequest(HttpClientImpl.java:164)
+	at twitter4j.HttpClientBase.request(HttpClientBase.java:53)
+	at twitter4j.HttpClientBase.get(HttpClientBase.java:71)
+	at twitter4j.TwitterImpl.get(TwitterImpl.java:1950)
+	at twitter4j.TwitterImpl.getFriendsIDs(TwitterImpl.java:395)
+	at retrieval.RetrieveFriendsJSON.main(RetrieveFriendsJSON.java:98)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader.main(JarRsrcLoader.java:58)
+401:Authentication credentials (https://dev.twitter.com/pages/auth) were missing or incorrect. Ensure that you have set valid consumer key/secret, access token/secret, and the system clock is in sync.
+{"request":"\/1.1\/friends\/ids.json?user_id=59153817&cursor=-1&include_entities=true","error":"Not authorized."}
+
+Relevant discussions can be found on the Internet at:
+	http://www.google.co.jp/search?q=a0c96a69 or
+	http://www.google.co.jp/search?q=1935c143
+TwitterException{exceptionCode=[a0c96a69-1935c143], statusCode=401, message=null, code=-1, retryAfter=-1, rateLimitStatus=RateLimitStatusJSONImpl{remaining=2, limit=15, resetTimeInSeconds=1399059665, secondsUntilReset=179}, version=4.0.1}
+	at twitter4j.HttpClientImpl.handleRequest(HttpClientImpl.java:164)
+	at twitter4j.HttpClientBase.request(HttpClientBase.java:53)
+	at twitter4j.HttpClientBase.get(HttpClientBase.java:71)
+	at twitter4j.TwitterImpl.get(TwitterImpl.java:1950)
+	at twitter4j.TwitterImpl.getFriendsIDs(TwitterImpl.java:395)
+	at retrieval.RetrieveFriendsJSON.main(RetrieveFriendsJSON.java:98)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader.main(JarRsrcLoader.java:58)
+401:Authentication credentials (https://dev.twitter.com/pages/auth) were missing or incorrect. Ensure that you have set valid consumer key/secret, access token/secret, and the system clock is in sync.
+{"request":"\/1.1\/friends\/ids.json?user_id=2472845629&cursor=-1&include_entities=true","error":"Not authorized."}
+
+Relevant discussions can be found on the Internet at:
+	http://www.google.co.jp/search?q=a0c96a69 or
+	http://www.google.co.jp/search?q=1935c143
+TwitterException{exceptionCode=[a0c96a69-1935c143], statusCode=401, message=null, code=-1, retryAfter=-1, rateLimitStatus=RateLimitStatusJSONImpl{remaining=7, limit=15, resetTimeInSeconds=1399060566, secondsUntilReset=480}, version=4.0.1}
+	at twitter4j.HttpClientImpl.handleRequest(HttpClientImpl.java:164)
+	at twitter4j.HttpClientBase.request(HttpClientBase.java:53)
+	at twitter4j.HttpClientBase.get(HttpClientBase.java:71)
+	at twitter4j.TwitterImpl.get(TwitterImpl.java:1950)
+	at twitter4j.TwitterImpl.getFriendsIDs(TwitterImpl.java:395)
+	at retrieval.RetrieveFriendsJSON.main(RetrieveFriendsJSON.java:98)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader.main(JarRsrcLoader.java:58)
+429:Returned in API v1.1 when a request cannot be served due to the application's rate limit having been exhausted for the resource. See Rate Limiting in API v1.1.(https://dev.twitter.com/docs/rate-limiting/1.1)
+message - Rate limit exceeded
+code - 88
+
+Relevant discussions can be found on the Internet at:
+	http://www.google.co.jp/search?q=a0c96a69 or
+	http://www.google.co.jp/search?q=1935c143
+TwitterException{exceptionCode=[a0c96a69-1935c143], statusCode=429, message=Rate limit exceeded, code=88, retryAfter=-1, rateLimitStatus=RateLimitStatusJSONImpl{remaining=0, limit=15, resetTimeInSeconds=1399060566, secondsUntilReset=0}, version=4.0.1}
+	at twitter4j.HttpClientImpl.handleRequest(HttpClientImpl.java:164)
+	at twitter4j.HttpClientBase.request(HttpClientBase.java:53)
+	at twitter4j.HttpClientBase.get(HttpClientBase.java:71)
+	at twitter4j.TwitterImpl.get(TwitterImpl.java:1950)
+	at twitter4j.TwitterImpl.getFriendsIDs(TwitterImpl.java:395)
+	at retrieval.RetrieveFriendsJSON.main(RetrieveFriendsJSON.java:98)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader.main(JarRsrcLoader.java:58)
+404:The URI requested is invalid or the resource requested, such as a user, does not exists. Also returned when the requested format is not supported by the requested method.
+message - Sorry, that page does not exist
+code - 34
+
+Relevant discussions can be found on the Internet at:
+	http://www.google.co.jp/search?q=a0c96a69 or
+	http://www.google.co.jp/search?q=1935c143
+TwitterException{exceptionCode=[a0c96a69-1935c143], statusCode=404, message=Sorry, that page does not exist, code=34, retryAfter=-1, rateLimitStatus=RateLimitStatusJSONImpl{remaining=14, limit=15, resetTimeInSeconds=1399061525, secondsUntilReset=899}, version=4.0.1}
+	at twitter4j.HttpClientImpl.handleRequest(HttpClientImpl.java:164)
+	at twitter4j.HttpClientBase.request(HttpClientBase.java:53)
+	at twitter4j.HttpClientBase.get(HttpClientBase.java:71)
+	at twitter4j.TwitterImpl.get(TwitterImpl.java:1950)
+	at twitter4j.TwitterImpl.getFriendsIDs(TwitterImpl.java:395)
+	at retrieval.RetrieveFriendsJSON.main(RetrieveFriendsJSON.java:98)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader.main(JarRsrcLoader.java:58)
+429:Returned in API v1.1 when a request cannot be served due to the application's rate limit having been exhausted for the resource. See Rate Limiting in API v1.1.(https://dev.twitter.com/docs/rate-limiting/1.1)
+message - Rate limit exceeded
+code - 88
+
+Relevant discussions can be found on the Internet at:
+	http://www.google.co.jp/search?q=a0c96a69 or
+	http://www.google.co.jp/search?q=1935c143
+TwitterException{exceptionCode=[a0c96a69-1935c143], statusCode=429, message=Rate limit exceeded, code=88, retryAfter=-1, rateLimitStatus=RateLimitStatusJSONImpl{remaining=0, limit=15, resetTimeInSeconds=1399061525, secondsUntilReset=0}, version=4.0.1}
+	at twitter4j.HttpClientImpl.handleRequest(HttpClientImpl.java:164)
+	at twitter4j.HttpClientBase.request(HttpClientBase.java:53)
+	at twitter4j.HttpClientBase.get(HttpClientBase.java:71)
+	at twitter4j.TwitterImpl.get(TwitterImpl.java:1950)
+	at twitter4j.TwitterImpl.getFriendsIDs(TwitterImpl.java:395)
+	at retrieval.RetrieveFriendsJSON.main(RetrieveFriendsJSON.java:98)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader.main(JarRsrcLoader.java:58)
+429:Returned in API v1.1 when a request cannot be served due to the application's rate limit having been exhausted for the resource. See Rate Limiting in API v1.1.(https://dev.twitter.com/docs/rate-limiting/1.1)
+message - Rate limit exceeded
+code - 88
+
+Relevant discussions can be found on the Internet at:
+	http://www.google.co.jp/search?q=a0c96a69 or
+	http://www.google.co.jp/search?q=1935c143
+TwitterException{exceptionCode=[a0c96a69-1935c143], statusCode=429, message=Rate limit exceeded, code=88, retryAfter=-1, rateLimitStatus=RateLimitStatusJSONImpl{remaining=0, limit=15, resetTimeInSeconds=1399062485, secondsUntilReset=0}, version=4.0.1}
+	at twitter4j.HttpClientImpl.handleRequest(HttpClientImpl.java:164)
+	at twitter4j.HttpClientBase.request(HttpClientBase.java:53)
+	at twitter4j.HttpClientBase.get(HttpClientBase.java:71)
+	at twitter4j.TwitterImpl.get(TwitterImpl.java:1950)
+	at twitter4j.TwitterImpl.getFriendsIDs(TwitterImpl.java:395)
+	at retrieval.RetrieveFriendsJSON.main(RetrieveFriendsJSON.java:98)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader.main(JarRsrcLoader.java:58)
+401:Authentication credentials (https://dev.twitter.com/pages/auth) were missing or incorrect. Ensure that you have set valid consumer key/secret, access token/secret, and the system clock is in sync.
+{"request":"\/1.1\/friends\/ids.json?user_id=379177022&cursor=-1&include_entities=true","error":"Not authorized."}
+
+Relevant discussions can be found on the Internet at:
+	http://www.google.co.jp/search?q=a0c96a69 or
+	http://www.google.co.jp/search?q=1935c143
+TwitterException{exceptionCode=[a0c96a69-1935c143], statusCode=401, message=null, code=-1, retryAfter=-1, rateLimitStatus=RateLimitStatusJSONImpl{remaining=10, limit=15, resetTimeInSeconds=1399063445, secondsUntilReset=658}, version=4.0.1}
+	at twitter4j.HttpClientImpl.handleRequest(HttpClientImpl.java:164)
+	at twitter4j.HttpClientBase.request(HttpClientBase.java:53)
+	at twitter4j.HttpClientBase.get(HttpClientBase.java:71)
+	at twitter4j.TwitterImpl.get(TwitterImpl.java:1950)
+	at twitter4j.TwitterImpl.getFriendsIDs(TwitterImpl.java:395)
+	at retrieval.RetrieveFriendsJSON.main(RetrieveFriendsJSON.java:98)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader.main(JarRsrcLoader.java:58)
+401:Authentication credentials (https://dev.twitter.com/pages/auth) were missing or incorrect. Ensure that you have set valid consumer key/secret, access token/secret, and the system clock is in sync.
+{"request":"\/1.1\/friends\/ids.json?user_id=2472834074&cursor=-1&include_entities=true","error":"Not authorized."}
+
+Relevant discussions can be found on the Internet at:
+	http://www.google.co.jp/search?q=a0c96a69 or
+	http://www.google.co.jp/search?q=1935c143
+TwitterException{exceptionCode=[a0c96a69-1935c143], statusCode=401, message=null, code=-1, retryAfter=-1, rateLimitStatus=RateLimitStatusJSONImpl{remaining=14, limit=15, resetTimeInSeconds=1399064345, secondsUntilReset=899}, version=4.0.1}
+	at twitter4j.HttpClientImpl.handleRequest(HttpClientImpl.java:164)
+	at twitter4j.HttpClientBase.request(HttpClientBase.java:53)
+	at twitter4j.HttpClientBase.get(HttpClientBase.java:71)
+	at twitter4j.TwitterImpl.get(TwitterImpl.java:1950)
+	at twitter4j.TwitterImpl.getFriendsIDs(TwitterImpl.java:395)
+	at retrieval.RetrieveFriendsJSON.main(RetrieveFriendsJSON.java:98)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader.main(JarRsrcLoader.java:58)
