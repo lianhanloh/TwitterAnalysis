@@ -47,6 +47,20 @@ public class RetrieveFriendsJSON {
 				userID = currentQueue.get(0);
 			}
 			in.close();
+			
+			//writer for printing the queue
+			outQueue = 
+					new BufferedWriter(new FileWriter(QUEUE));
+			
+			//print queue into text file
+			if (currentQueue.size() > 0) {
+				currentQueue.remove(userID);
+			}
+			for (long x: currentQueue) {
+				outQueue.write(Long.toString(x));
+				outQueue.newLine();
+			}
+			outQueue.close();
 
 			System.out.println("Getting followers and following for " + userID);
 
@@ -80,7 +94,6 @@ public class RetrieveFriendsJSON {
 			JSONObject newUser = new JSONObject();
 			JSONArray followingJSON = new JSONArray();
 
-			
 			//get friends' (following) IDs and add to edge list and queue
 			IDs ids = twitter.getFriendsIDs(userID, -1);
 			long[] following = ids.getIDs();
@@ -92,7 +105,6 @@ public class RetrieveFriendsJSON {
 					currentQueue.add(x);
 				}
 			}
-
 			
 			//get followers, add to queue and print to edge list
 			IDs followerIDs = twitter.getFollowersIDs(userID, -1);
@@ -118,19 +130,6 @@ public class RetrieveFriendsJSON {
 			out.flush();
 			out.close();
 
-			//writer for printing the queue
-			outQueue = 
-					new BufferedWriter(new FileWriter(QUEUE));
-
-			//print queue into text file
-			if (currentQueue.size() > 0) {
-				currentQueue.remove(userID);
-			}
-			for (long x: currentQueue) {
-				outQueue.write(Long.toString(x));
-				outQueue.newLine();
-			}
-			outQueue.close();
 		}
 		catch (IOException e) {
 			e.printStackTrace();
