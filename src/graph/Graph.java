@@ -46,10 +46,11 @@ public class Graph {
                 User user = new User(id);
                 HashSet<User> following = new HashSet<User>();
                 HashSet<User> followers = new HashSet<User>();
-                JSONArray userJSON = json.getJSONArray(id_string);
-                JSONArray followersJSON = userJSON.getJSONArray(FOLLOWERS);
+                JSONObject userJSON = json.getJSONObject(id_string);
+                JSONArray followersJSON = userJSON.getJSONArray("followers");
                 System.out.println("Twitter user " + i++ + " : " + id);
-                
+                int numFollowers = followersJSON.length();
+                System.out.println("num of followers = " + numFollowers);
                 allUsers.add(user);
             }
        
@@ -75,5 +76,8 @@ public class Graph {
         return allUsers;
     }
 
+    public static void main(String[] args) {
+        Graph graph = new Graph();
+    }
 
 }
