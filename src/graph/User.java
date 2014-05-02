@@ -18,6 +18,8 @@ public class User {
     
     public User(long id) {
         this.id = id;
+        this.followers = new HashSet<User>();
+        this.following = new HashSet<User>();
     }
     
     /** returns the set of users this user follows */
