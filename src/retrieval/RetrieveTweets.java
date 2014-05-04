@@ -26,7 +26,8 @@ import twitter4j.TwitterFactory;
  * 
  * Retrieves tweets of a particular user, and appends it in a json file
  * 
- * @author Nathaniel Chan and lianhanloh
+ * @author Nathaniel Chan (natc221)
+ * @author LianHan Loh
  *
  */
 public class RetrieveTweets {
