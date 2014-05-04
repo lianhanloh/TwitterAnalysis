@@ -9,8 +9,19 @@ import graph.User;
 
 public class TriadicClosure {
 
-    private static Graph graph;
-    private static Set<User> allUsers;
+    private Graph graph;
+    private Set<User> allUsers;
+
+    /** constructor with set of users */
+    public TriadicClosure (Set<User> allUsers) {
+        this.allUsers = allUsers;
+    }
+    
+    /** constructor with graph */
+    public TriadicClosure (Graph graph) {
+        this.graph = graph;
+        this.allUsers = graph.getGraph();
+    }
 
     static class Friend implements Comparable<Friend> {
 
@@ -31,7 +42,7 @@ public class TriadicClosure {
      * followers and following. Ignores the direction of the edge.
      * @return number of triangles in graph
      */
-    public static int triangleNumber() {
+    public int triangleNumber() {
         Set<Set<User>> triangles = new HashSet<Set<User>>();
 
         for (User user: allUsers) {
@@ -54,7 +65,7 @@ public class TriadicClosure {
         return triangles.size();
     }
 
-    public static void friendRecommendation(long id, boolean strong) {
+    public void friendRecommendation(long id, boolean strong) {
         // get target user
         User user = null;
         for (User u: allUsers) {
@@ -88,7 +99,7 @@ public class TriadicClosure {
                         count++;
                     }
                 }
-                
+
             }
             // add to set of potential friends if there are mutual friends
             if (count > 0) {
@@ -109,17 +120,17 @@ public class TriadicClosure {
 
 
     public static void main(String[] args) {
-        graph = new Graph();
-        allUsers = graph.getGraph();
-
-        //        System.out.println("Number of triangles: " + triangleNumber());
-        for (User user : allUsers) {
-            System.out.println("Friend recommendations for " + user.getID() 
-                    + ": ");
-            friendRecommendation(user.getID(), false);
-            System.out.println("------------------------------------------");
-            break;
-        }
+//        graph = new Graph();
+//        allUsers = graph.getGraph();
+//
+//        System.out.println("Number of triangles: " + triangleNumber());
+//        for (User user : allUsers) {
+//            System.out.println("Friend recommendations for " + user.getID() 
+//                    + ": ");
+//            friendRecommendation(user.getID(), false);
+//            System.out.println("------------------------------------------");
+//            break;
+//        }
     }
 
 }
