@@ -9,8 +9,8 @@ import graph.User;
 
 public class TriadicClosure {
 
-    private Graph graph;
-    private Set<User> allUsers;
+    private static Graph graph;
+    private static Set<User> allUsers;
 
     /** constructor with set of users */
     public TriadicClosure (Set<User> allUsers) {
@@ -42,7 +42,7 @@ public class TriadicClosure {
      * followers and following. Ignores the direction of the edge.
      * @return number of triangles in graph
      */
-    public int triangleNumber() {
+    public static int triangleNumber() {
         Set<Set<User>> triangles = new HashSet<Set<User>>();
 
         for (User user: allUsers) {
@@ -120,10 +120,13 @@ public class TriadicClosure {
 
 
     public static void main(String[] args) {
-//        graph = new Graph();
-//        allUsers = graph.getGraph();
-//
-//        System.out.println("Number of triangles: " + triangleNumber());
+    	
+    	
+    	
+        graph = new Graph();
+        allUsers = graph.getGraph();
+
+        System.out.println("Number of triangles: " + triangleNumber());
 //        for (User user : allUsers) {
 //            System.out.println("Friend recommendations for " + user.getID() 
 //                    + ": ");

@@ -57,7 +57,7 @@ public class User {
         return followers.contains(user) && following.contains(user);
     }
     
-    
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -73,6 +73,11 @@ public class User {
             return false;
         }
         return true;
+    }
+    
+    @Override
+    public int hashCode() {
+    	return (int) (41 * this.id);
     }
     
     public static void main(String[] args) {
