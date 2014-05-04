@@ -22,6 +22,11 @@ public class User {
         this.following = new HashSet<User>();
     }
     
+    /** returns user's ID */
+    public long getID() {
+        return id;
+    }
+    
     /** returns the set of users this user follows */
     public HashSet<User> getFollowing () {
         return following;
@@ -42,12 +47,17 @@ public class User {
         this.followers = followers;
     }
     
+    /** returns true if either user follows the other */
     public boolean isConnectedTo(User user) {
     	return followers.contains(user) || following.contains(user);
     }
     
+    /** returns true if both users follow each other */
+    public boolean isStrongFriend(User user) {
+        return followers.contains(user) && following.contains(user);
+    }
     
-    @Override
+    
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -63,5 +73,18 @@ public class User {
             return false;
         }
         return true;
+    }
+    
+    public static void main(String[] args) {
+        User user2 = new User(2);
+        HashSet<User> following = new HashSet<User>();
+        HashSet<User> followers = new HashSet<User>();
+        User user3 = new User(3);
+        following.add(user3);
+        followers.add(user2);
+        user2.setFollowers(followers);
+        user2.setFollowing(following);
+        System.out.println(user2.isConnectedTo(user3));
+        
     }
 }
