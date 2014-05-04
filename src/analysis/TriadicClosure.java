@@ -44,7 +44,10 @@ public class TriadicClosure {
                         currentTriang.add(user);
                         currentTriang.add(x);
                         currentTriang.add(y);
-                        triangles.add(currentTriang);
+                        // add triangle if it isn't already included
+                        if (! triangles.contains(currentTriang)) {
+                            triangles.add(currentTriang);
+                        }
                     }
                 }
             }
@@ -113,10 +116,21 @@ public class TriadicClosure {
         Set<User> g = graph.getGraph();
     	long end = System.nanoTime();
 
-//        System.out.println("Number of triangles: " + triangleNumber(g));
+        System.out.println("Number of triangles: " + triangleNumber(g));
         System.out.println("Number of users: " + g.size());
         System.out.println("Took " + (end-start) + "ns to setup");
         friendRecommendation(g, 12, false);
+        //        graph = new Graph();
+        //        allUsers = graph.getGraph();
+        //
+        //        System.out.println("Number of triangles: " + triangleNumber());
+        //        for (User user : allUsers) {
+        //            System.out.println("Friend recommendations for " + user.getID() 
+        //                    + ": ");
+        //            friendRecommendation(user.getID(), false);
+        //            System.out.println("------------------------------------------");
+        //            break;
+        //        }
     }
 
 }

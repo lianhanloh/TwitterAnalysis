@@ -16,9 +16,9 @@ public class Tests {
     public void testTriadicClosure() {
         User user1 = new User(1);
         User user2 = new User(2);
+        User user3 = new User(3);
         HashSet<User> following = new HashSet<User>();
         HashSet<User> followers = new HashSet<User>();
-        User user3 = new User(3);
         following.add(user1);
         following.add(user2);
         following.add(user3);
@@ -40,5 +40,24 @@ public class Tests {
 //        assertEquals("there should be 1 triangle", 1, test.triangleNumber());
         System.out.println(test.triangleNumber());
         
+    }
+    
+    @Test public void testHashSetEquality () {
+        User user1 = new User(1);
+        User user2 = new User(2);
+        User user3 = new User(3);
+        User user11 = new User(1);
+        User user22 = new User(2);
+        User user33 = new User(3);
+        Set<Set<User>> triangles = new HashSet<Set<User>>();
+        HashSet<User> first = new HashSet<User>();
+        HashSet<User> second = new HashSet<User>();
+        first.add(user1);
+        first.add(user2);
+        first.add(user3);
+        second.add(user11);
+        second.add(user22);
+        second.add(user33);
+        assertTrue("equal sets", first.equals(second));
     }
 }
