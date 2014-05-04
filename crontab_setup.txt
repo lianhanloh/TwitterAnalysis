@@ -1,15 +1,25 @@
-type in the command " crontab -e " 
-on eniac, emacs (a text editor) should open up. just type in the following two lines.
-Update the file path to "pullFollowersData.sh" to the file path for that file in your eniac account
+Instructions to set up crontab to pull user data.
+
+Dependencies:
+- A computer system that runs the Cron Daemon or something that performs the same function
+- pullFollowersData.sh
+- retrieveFriends.jar
+
+Set up
+
+1. open pullFollowersData.sh and update the file path to your jar executable.
+2. Create empty adjacencyList.json and queue.txt files. Create count.txt and type in one line - "0".
+3. In terminal, type in the command " crontab -e" and type the following lines.
+# pulls Twitter user data every min
+# * * * * * ~/Path/to/your/script/pullFollowersData.sh > /dev/null 2>&1
 
 take away the "#" in front of the second line to run the cron job. you can disable it by adding the
 "#" back in
 
-Press ctrl + x, ctrl + s to save.
-Press ctrl + x, ctrl + c to exit. 
+4. Save and exit the text editor. If you get the output "crontab edited" you should be fine. 
+5. Check count.txt periodically to see if the program is being run. Check errors.txt to for any
+errors the program prints out. Typically there will be rate-limiting exceptions thrown by Twitter
+API once in awhile. Check for fatal and/or unusual errors. AdjacencyList.json should be increasing
+in file length as time passes. Disable the cron job by commenting out the second line in your
+crontab when you have enough users. 
 
-if you get the output "crontab edited" you should be fine. just check count.txt to see if the count is being updated
-	every minute. 
-
-# pulls Twitter user data every min
-# * * * * * ~/Documents/nets150/TweetAnalysis/pullFollowersData.sh > /dev/null 2>&1
