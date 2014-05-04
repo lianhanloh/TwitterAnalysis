@@ -57,10 +57,7 @@ public class TriadicClosure {
                         currentTriang.add(user);
                         currentTriang.add(x);
                         currentTriang.add(y);
-                        // add triangle if it isn't already included
-                        if (! triangles.contains(currentTriang)) {
-                            triangles.add(currentTriang);
-                        }
+                        triangles.add(currentTriang);
                     }
                 }
             }
