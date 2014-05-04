@@ -36,19 +36,20 @@ public class Graph {
 	 * @throws IOException
 	 * @throws JSONException
 	 */
-	public Graph(String file1, String file2) throws IOException, JSONException {
-
-		// open and read json files
-		InputStream isOne = new FileInputStream(file1);
-		String jsonTxtOne = IOUtils.toString(isOne);
-		InputStream isTwo = new FileInputStream(file2);
-		String jsonTxtTwo = IOUtils.toString(isTwo);
-		addUsers(jsonTxtOne);
-		addUsers(jsonTxtTwo);
-		addEdges(jsonTxtOne);
-		addEdges(jsonTxtTwo);
-		isOne.close();
-		isOne.close();
+	public Graph(String[] files) throws IOException, JSONException {
+		
+		for (String x: files) {
+			InputStream is = new FileInputStream(x);
+			String jsonTxt = IOUtils.toString(is);
+			addUsers(jsonTxt);
+			is.close();
+		}
+		for (String x: files) {
+			InputStream is = new FileInputStream(x);
+			String jsonTxt = IOUtils.toString(is);
+			addEdges(jsonTxt);
+			is.close();
+		}
 	}
 
 	/**
@@ -131,31 +132,6 @@ public class Graph {
 	/** returns all the users */
 	public Set<User> getGraph() {
 		return allUsers;
-	}
-
-	public static void main(String[] args) {
-		Graph graph;
-		try {
-			graph = new Graph(JSON_FILE, JSON_FILE_LH);
-			Set<User> g = graph.getGraph();
-			System.out.println();
-			System.out.println("Number of users:" + g.size());
-			for (User x: g) {
-				System.out.println();
-				System.out.println("ID: " + x.getID());
-				System.out.println("Followers:");
-				for (User i: x.getFollowers())
-					System.out.println(i.getID());
-				
-				System.out.println("Following:");
-				for (User j: x.getFollowing())
-					System.out.println(j.getID());
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
 	}
 
 }

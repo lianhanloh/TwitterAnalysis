@@ -129,6 +129,7 @@ public class TriadicClosure {
     }
 
     public static void main(String[] args) {
+    	/*
     	System.out.println("Setting up graph...");
     	long start = System.nanoTime();
     	Graph graph = new Graph();
@@ -139,6 +140,7 @@ public class TriadicClosure {
         System.out.println("Number of users: " + g.size());
         System.out.println("Took " + (end-start) + "ns to setup");
         friendRecommendation(g, 12, false, 5);
+        */
         //        graph = new Graph();
         //        allUsers = graph.getGraph();
         //
