@@ -8,36 +8,26 @@ import graph.Graph;
 import graph.User;
 
 /**
- * This class provides methods to analyze and/or work with a graph of twitter
- * users. 
- * 
- * @author Lianhan Loh and Nathaniel Chan
+ * This class provides methods to analyze and/or work with twitter user data in 
+ * a graph representation
+ * @author Nathaniel Chan and Lianhan Loh
  *
  */
 
 public class TriadicClosure {
-    
+
     static class Friend implements Comparable<Friend> {
 
-        private long friend;
-        private long id;
-        private int count;
-        public Friend (long id, long friend, int count) {
+        public long id;
+        public int count;
+        public Friend (long id, int count) {
             this.id = id;
-            this.friend = friend;
             this.count = count;
         }
-
+        
+        @Override
         public int compareTo(Friend f) {
             return f.count - this.count;
-        }
-        
-        public long getID() {
-            return id;
-        }
-        
-        public long getFriend() {
-            return friend;
         }
     }
 
@@ -50,10 +40,10 @@ public class TriadicClosure {
         Set<Set<User>> triangles = new HashSet<Set<User>>();
 
         for (User user: allUsers) {
-            System.out.println("Originating from :" + user.getID());
+        	System.out.println("Originating from :" + user.getID());
             HashSet<User> connected = user.getFollowers();
             connected.addAll(user.getFollowing());
-
+            
             for (User x: connected) {
                 for (User y: connected) {
                     if (x.equals(y)) continue;
@@ -71,20 +61,18 @@ public class TriadicClosure {
     }
 
     /**
-     * Takes in a set of users in a graph representation and returns a set of 
-     * friend recommendations for a particular user.
-     * @param allUsers set of users
-     * @param id the intended user's ID
-     * @param strong true if only strong friendships or considered, weak if any 
-     * tie is included. Strong friendship is defined as two users following each
-     * other, while weak friendship includes relationships where either user
-     * follows the other
-     * @return sorted set of friend recommendations, returns null if the user 
-     * is not in the set of users, returns an empty set if there are no
-     * friend recommendations for the user.
+     * Given a set of users and a target user, prints out the top x recommended
+     * friends based on number of strong/weak mutual friends. A friendship is
+     * strong if two users follow each other, and weak if only one of the users 
+     * follows the other.
+     * @param allUsers set of all users in graph 
+     * @param id target user
+     * @param strong true if only strong friendships are counted, false if 
+     * weak friendships are included too
+     * @param num number of friend recommendations to make
      */
-    public static Set<Friend> friendRecommendation(Set<User> allUsers, 
-            long id, boolean strong) {
+    public static void friendRecommendation(Set<User> allUsers, 
+    		long id, boolean strong, int num) {
         // get target user
         User user = null;
         for (User u: allUsers) {
@@ -96,13 +84,13 @@ public class TriadicClosure {
         // return with error message if user is not in set of all users 
         if (user == null) {
             System.out.println("Error: user is not in database");
-            return null;
+            return;
         }
         // create set of potential friends
         TreeSet<Friend> potentials = new TreeSet<Friend> ();
         int count = 0;
         for (User u: allUsers) {
-            if (u.getID() == id) continue;
+        	if (u.getID() == id) continue;
             HashSet<User> connected = u.getFollowers();
             connected.addAll(u.getFollowing());
             for (User f: connected) {
@@ -122,27 +110,46 @@ public class TriadicClosure {
             }
             // add to set of potential friends if there are mutual friends
             if (count > 0) {
-                potentials.add(new Friend(u.getID(), id, count));
+                potentials.add(new Friend(u.getID(), count));
                 // reset count to 0
                 count = 0;
             }
         }
-        // return set of recommendations
-        return potentials;
+        // print list of friends
+        int i = 0;
+        for (Friend f: potentials) {
+            if (i >= num) break;
+            System.out.println("Friend " + f.id + " has " + f.count 
+                    + " mutual friends with " + id);
+            i++;
+        }
+        if (potentials.size() == 0) {
+            System.out.println("There are no friend recommendations for " + id);
+        }
     }
 
     public static void main(String[] args) {
-        System.out.println("Setting up graph...");
-        long start = System.nanoTime();
-        Graph graph = new Graph();
+    	System.out.println("Setting up graph...");
+    	long start = System.nanoTime();
+    	Graph graph = new Graph();
         Set<User> g = graph.getGraph();
-        long end = System.nanoTime();
+    	long end = System.nanoTime();
 
         System.out.println("Number of triangles: " + triangleNumber(g));
         System.out.println("Number of users: " + g.size());
         System.out.println("Took " + (end-start) + "ns to setup");
-        friendRecommendation(g, 12, false);
-        graph = new Graph();
+        friendRecommendation(g, 12, false, 5);
+        //        graph = new Graph();
+        //        allUsers = graph.getGraph();
+        //
+        //        System.out.println("Number of triangles: " + triangleNumber());
+        //        for (User user : allUsers) {
+        //            System.out.println("Friend recommendations for " + user.getID() 
+        //                    + ": ");
+        //            friendRecommendation(user.getID(), false);
+        //            System.out.println("------------------------------------------");
+        //            break;
+        //        }
     }
 
 }
