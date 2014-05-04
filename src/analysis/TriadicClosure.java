@@ -9,20 +9,6 @@ import graph.User;
 
 public class TriadicClosure {
 
-    private static Graph graph;
-    private static Set<User> allUsers;
-
-    /** constructor with set of users */
-    public TriadicClosure (Set<User> allUsers) {
-        this.allUsers = allUsers;
-    }
-    
-    /** constructor with graph */
-    public TriadicClosure (Graph graph) {
-        this.graph = graph;
-        this.allUsers = graph.getGraph();
-    }
-
     static class Friend implements Comparable<Friend> {
 
         public long id;
@@ -33,7 +19,7 @@ public class TriadicClosure {
         }
 
         public int compareTo(Friend f) {
-            return this.count - f.count;
+            return f.count - this.count;
         }
     }
 
@@ -42,13 +28,14 @@ public class TriadicClosure {
      * followers and following. Ignores the direction of the edge.
      * @return number of triangles in graph
      */
-    public static int triangleNumber() {
+    public static int triangleNumber(Set<User> allUsers) {
         Set<Set<User>> triangles = new HashSet<Set<User>>();
 
         for (User user: allUsers) {
+        	System.out.println("Originating from :" + user.getID());
             HashSet<User> connected = user.getFollowers();
             connected.addAll(user.getFollowing());
-
+            
             for (User x: connected) {
                 for (User y: connected) {
                     if (x.equals(y)) continue;
@@ -65,7 +52,8 @@ public class TriadicClosure {
         return triangles.size();
     }
 
-    public void friendRecommendation(long id, boolean strong) {
+    public static void friendRecommendation(Set<User> allUsers, 
+    		long id, boolean strong) {
         // get target user
         User user = null;
         for (User u: allUsers) {
@@ -83,6 +71,7 @@ public class TriadicClosure {
         TreeSet<Friend> potentials = new TreeSet<Friend> ();
         int count = 0;
         for (User u: allUsers) {
+        	if (u.getID() == id) continue;
             HashSet<User> connected = u.getFollowers();
             connected.addAll(u.getFollowing());
             for (User f: connected) {
@@ -95,7 +84,6 @@ public class TriadicClosure {
                 // else include weak friends
                 else {
                     if (f.isConnectedTo(u)) {
-                        System.out.println("reached");
                         count++;
                     }
                 }
@@ -118,22 +106,17 @@ public class TriadicClosure {
         }
     }
 
-
     public static void main(String[] args) {
-    	
-    	
-    	
-        graph = new Graph();
-        allUsers = graph.getGraph();
+    	System.out.println("Setting up graph...");
+    	long start = System.nanoTime();
+    	Graph graph = new Graph();
+        Set<User> g = graph.getGraph();
+    	long end = System.nanoTime();
 
-        System.out.println("Number of triangles: " + triangleNumber());
-//        for (User user : allUsers) {
-//            System.out.println("Friend recommendations for " + user.getID() 
-//                    + ": ");
-//            friendRecommendation(user.getID(), false);
-//            System.out.println("------------------------------------------");
-//            break;
-//        }
+//        System.out.println("Number of triangles: " + triangleNumber(g));
+        System.out.println("Number of users: " + g.size());
+        System.out.println("Took " + (end-start) + "ns to setup");
+        friendRecommendation(g, 12, false);
     }
 
 }
