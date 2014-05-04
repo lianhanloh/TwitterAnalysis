@@ -30,6 +30,31 @@ public class Graph {
     private static Set<User> allUsers = new HashSet<User>();
 
     public Graph() {
+    	
+    	InputStream is;
+		try {
+			is = new FileInputStream("testAdjacency.json");
+			String jsonTxt = IOUtils.toString(is);
+			
+			JSONObject json = new JSONObject(jsonTxt);
+			
+			addUsers(jsonTxt);
+			addEdges(jsonTxt);
+			
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+    	
+    	/*
 
         // open and read json file
         try {
@@ -55,7 +80,7 @@ public class Graph {
             System.out.println("Internal error: " 
                     + e.getMessage());
             e.printStackTrace();
-        }
+        }*/
     }
 
     /**
@@ -70,6 +95,9 @@ public class Graph {
         while (it.hasNext()) {
             String id_string = (String) it.next();
             long id = Long.parseLong(id_string);
+            
+            System.out.println(id);
+            
             User user = new User(id);
             HashSet<User> following = new HashSet<User>();
             HashSet<User> followers = new HashSet<User>();
@@ -83,7 +111,9 @@ public class Graph {
                 if (!allUsers.contains(follower)) {
                     continue;
                 }
-                if (!followers.add(follower) ) {
+                boolean check = followers.add(follower);
+                System.out.println(check);
+                if (!check) {
                     throw new RuntimeException("Repeat followers at user "
                             + id + ": " + "follower number: " + j);
                 }
@@ -94,6 +124,7 @@ public class Graph {
             int numFollowing = followingJSON.length();
             for (int j = 0; j < numFollowing; j++) {
                 User friend = new User(followingJSON.getInt(j));
+                System.out.println(allUsers.contains(friend));
                 if (!allUsers.contains(friend)) {
                     continue;
                 }
@@ -103,8 +134,6 @@ public class Graph {
                 }
             }
             user.setFollowing(following);
-            // add to set of users
-            allUsers.add(user);
         }
     }
 
@@ -133,6 +162,19 @@ public class Graph {
 
     public static void main(String[] args) {
         Graph graph = new Graph();
+        Set<User> g = graph.getGraph();
+        System.out.println("Number of users:" + g.size());
+        for (User x: g) {
+        	System.out.println("ID: " + x.getID());
+        	System.out.println("Followers:");
+        	System.out.println(x.getFollowers().size());
+        	for (User i: x.getFollowers())
+        		System.out.println(i.getID());
+        	
+        	System.out.println("Following:");
+        	for (User j: x.getFollowing())
+        		System.out.println(j.getID());
+        }
     }
 
 }
