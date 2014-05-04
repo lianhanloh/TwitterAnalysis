@@ -16,7 +16,7 @@ public class TriadicClosure {
     public TriadicClosure (Set<User> allUsers) {
         this.allUsers = allUsers;
     }
-    
+
     /** constructor with graph */
     public TriadicClosure (Graph graph) {
         this.graph = graph;
@@ -57,7 +57,10 @@ public class TriadicClosure {
                         currentTriang.add(user);
                         currentTriang.add(x);
                         currentTriang.add(y);
-                        triangles.add(currentTriang);
+                        // add triangle if it isn't already included
+                        if (! triangles.contains(currentTriang)) {
+                            triangles.add(currentTriang);
+                        }
                     }
                 }
             }
@@ -120,17 +123,17 @@ public class TriadicClosure {
 
 
     public static void main(String[] args) {
-//        graph = new Graph();
-//        allUsers = graph.getGraph();
-//
-//        System.out.println("Number of triangles: " + triangleNumber());
-//        for (User user : allUsers) {
-//            System.out.println("Friend recommendations for " + user.getID() 
-//                    + ": ");
-//            friendRecommendation(user.getID(), false);
-//            System.out.println("------------------------------------------");
-//            break;
-//        }
+        //        graph = new Graph();
+        //        allUsers = graph.getGraph();
+        //
+        //        System.out.println("Number of triangles: " + triangleNumber());
+        //        for (User user : allUsers) {
+        //            System.out.println("Friend recommendations for " + user.getID() 
+        //                    + ": ");
+        //            friendRecommendation(user.getID(), false);
+        //            System.out.println("------------------------------------------");
+        //            break;
+        //        }
     }
 
 }

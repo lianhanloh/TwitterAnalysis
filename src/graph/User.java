@@ -57,7 +57,6 @@ public class User {
         return followers.contains(user) && following.contains(user);
     }
     
-    
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
