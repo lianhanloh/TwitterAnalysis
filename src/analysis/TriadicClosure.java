@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
-import graph.Graph;
 import graph.User;
 
 /**
@@ -119,39 +118,13 @@ public class TriadicClosure {
         int i = 0;
         for (Friend f: potentials) {
             if (i >= num) break;
-            System.out.println("Friend " + f.id + " has " + f.count 
-                    + " mutual friends with " + id);
+            System.out.println("Twitter user " + f.id + ":\t(" + f.count 
+                    + " mutual friends)");
             i++;
         }
         if (potentials.size() == 0) {
             System.out.println("There are no friend recommendations for " + id);
         }
-    }
-
-    public static void main(String[] args) {
-    	/*
-    	System.out.println("Setting up graph...");
-    	long start = System.nanoTime();
-    	Graph graph = new Graph();
-        Set<User> g = graph.getGraph();
-    	long end = System.nanoTime();
-
-        System.out.println("Number of triangles: " + triangleNumber(g));
-        System.out.println("Number of users: " + g.size());
-        System.out.println("Took " + (end-start) + "ns to setup");
-        friendRecommendation(g, 12, false, 5);
-        */
-        //        graph = new Graph();
-        //        allUsers = graph.getGraph();
-        //
-        //        System.out.println("Number of triangles: " + triangleNumber());
-        //        for (User user : allUsers) {
-        //            System.out.println("Friend recommendations for " + user.getID() 
-        //                    + ": ");
-        //            friendRecommendation(user.getID(), false);
-        //            System.out.println("------------------------------------------");
-        //            break;
-        //        }
     }
 
 }

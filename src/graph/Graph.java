@@ -1,7 +1,6 @@
 package graph;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashSet;
@@ -18,15 +17,13 @@ import twitter4j.JSONObject;
  * This class parses a JSON file of twitter users and who they follow and are 
  * their followers to populate a graph representation of users.
  * 
- * @author lianhanloh and natchan
+ * @author Lianhan Loh and Nathaniel Chan (natc221)
  *
  */
 
 public class Graph {
 
 	/** class fields */
-	private static final String JSON_FILE = "adjacencyList.json";
-	private static final String JSON_FILE_LH = "adjacencyList_lh.json";
 	private Set<User> allUsers = new HashSet<User>();
 
 	/**

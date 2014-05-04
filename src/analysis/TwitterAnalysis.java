@@ -104,7 +104,7 @@ public class TwitterAnalysis {
 			try {
 				TimeUnit.MILLISECONDS.sleep(1000);
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				//do nothing
 			}
 
 		}
