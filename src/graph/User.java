@@ -74,6 +74,11 @@ public class User {
         }
         return true;
     }
+
+    @Override
+    public int hashCode() {
+    	return (int) (41 * this.id);
+    }
     
     public static void main(String[] args) {
         User user2 = new User(2);
