@@ -31,31 +31,7 @@ public class Graph {
 
     public Graph() {
     	
-    	/*
-    	InputStream is;
-		try {
-			is = new FileInputStream("testAdjacency.json");
-			String jsonTxt = IOUtils.toString(is);
-			
-			JSONObject json = new JSONObject(jsonTxt);
-			
-			addUsers(jsonTxt);
-			addEdges(jsonTxt);
-			
-			
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-
-    	
-        // open and read json file
+        // open and read json files
         try {
             InputStream isOne = new FileInputStream(JSON_FILE);
             String jsonTxtOne = IOUtils.toString(isOne);
