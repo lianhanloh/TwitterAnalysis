@@ -1,5 +1,0 @@
-/**
- * @author lianhanloh
- *
- */
-package retrieval;
