@@ -14,6 +14,13 @@ import org.apache.commons.io.IOUtils;
 import twitter4j.JSONException;
 import twitter4j.JSONObject;
 
+/**
+ * Checks and displays how many users have been visited, and how many users
+ * are in the queue.
+ * 
+ * @author Nathaniel Chan (natc221)
+ *
+ */
 public class GetUserNumber {
 	private static final String JSON_FILE = "adjacencyList.json";
 	private static final String QUEUE = "queue.txt";

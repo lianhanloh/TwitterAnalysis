@@ -21,6 +21,18 @@ import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 
+/**
+ * Retrieves the friends of the next user on the queue, and appends it to
+ * the json file of the adjacency list.
+ * If first time running then will initiate from the specified user ID to begin
+ * with.
+ * 
+ * Traverses twitter topology with breadth first search (BFS).
+ * 
+ * @author Nathaniel Chan (natc221)
+ * @author LianHan Loh
+ *
+ */
 public class RetrieveFriendsJSON {
 
 	private static final String JSON_FILE = "adjacencyList.json";
@@ -63,7 +75,6 @@ public class RetrieveFriendsJSON {
 			outQueue.close();
 
 			System.out.println("Getting followers and following for " + userID);
-
 			HashSet<Long> allNodes = new HashSet<Long>();
 
 			@SuppressWarnings("resource")
