@@ -3,10 +3,12 @@ Twitter Analysis
 
 In this project, we retrieved our own dataset from Twitter by writing code in Java, generating an executable jar, then running a script as a cronjob. We collected our own dataset because there is no available Twitter data that includes the topology and the user IDs. With the user IDs, one can use Twitter's API to access more data, including tweets and other information.
 
-We also wrote a program that can analyze the Twitter dataset that one has, including finding the number of triangles in the graph, and providing recommendations based on triadic closure.
+We also wrote a program that can analyze the Twitter dataset that one has, including finding the
+number of triangles in the graph, and providing friend recommendations based on triadic closure.
 
 This project was mainly implementation, but also has some empirical analysis.
 
 The main project breakdown was as follows:
-Lianhan - implemented methods to build and analyze graph, also wrote the script and cronjob for colelcting data.
+Lianhan - implemented methods to build and analyze graph, also wrote the script and cronjob for
+collecting data.
 Nathaniel - wrote code for retrieving friends (and tweets), using json files to store the data, and implemented methods to analyze graph.
