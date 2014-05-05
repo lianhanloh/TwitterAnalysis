@@ -7,8 +7,7 @@ This program will retrieve public tweets and analyze the data
 Usage Instructions
 ====================
 
-- Twitter developer authentication
-at <URL>
+- Twitter developer [authentication] (https://apps.twitter.com/app/new)
 
 Design choices and Documentation
 ====================

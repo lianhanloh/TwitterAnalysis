@@ -4,6 +4,7 @@ Dependencies:
 - A computer system that runs the Cron Daemon or something that performs the same function
 - pullFollowersData.sh
 - retrieveFriends.jar
+- Twitter4j.properties file with authentication keys
 
 Set up
 
