@@ -36,11 +36,11 @@ public class TwitterAnalysis {
 			System.out.println("C. Friend recommendations "
 					+ "for a user (strong ties**)");
 			System.out.println("D. Friend recommendations "
-					+ "for a user (strong ties**)");
-			System.out.println("\n\nstrong ties: edges have to be "
-					+ "bidirectional for a recommendation to be made");
-			System.out.println("weak ties: there is an existing "
-					+ "edge between users");
+					+ "for a user (weak ties**)");
+			System.out.println("\n\nstrong ties: only friendships where both "
+					+ "users follow each other are counted");
+			System.out.println("weak ties: friendships where either or both "
+					+ "users follow each other are counted");
 
 			String answer = in.nextLine().trim();
 			if (answer.equals("quit")) {
@@ -100,7 +100,7 @@ public class TwitterAnalysis {
 							id, false, no);
 				}
 			}
-			//pause before prompt for next answer
+			//pause before prompting for next answer
 			try {
 				TimeUnit.MILLISECONDS.sleep(1000);
 			} catch (InterruptedException e) {

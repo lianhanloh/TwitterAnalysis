@@ -118,7 +118,7 @@ public class TriadicClosure {
         int i = 0;
         for (Friend f: potentials) {
             if (i >= num) break;
-            System.out.println("Twitter user " + f.id + ":\t(" + f.count 
+            System.out.println("Twitter user " + f.id + ":\t\t(" + f.count 
                     + " mutual friends)");
             i++;
         }
