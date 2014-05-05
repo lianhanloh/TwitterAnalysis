@@ -22,9 +22,12 @@ public class TwitterAnalysis {
 		try {
 			graph = new Graph(args);
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("Error: file failed to open");
+			System.out.println(e.getMessage());
+			System.exit(2);
 		} catch (JSONException e) {
-			e.printStackTrace();
+			System.out.println("JSON Error: " + e.getMessage());
+			System.exit(3);
 		}
 
 		while (true) {
