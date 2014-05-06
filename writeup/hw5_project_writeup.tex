@@ -25,14 +25,14 @@ Twitter's API had a rate limit for making requests to collect data, and as a res
 
 \noindent\textbf{Analysis}
 
-We could then do some analysis with the data, and also generalize these analysis methods to any set of Twitter data, so it can be used by any other user. To run the analysis, execute $\texttt{TwitterAnalysis.java}$ with at least one argument, with each argument being the name of the json file. To use our data set, enter the following in the command line after compiling the project: $\texttt{java TwitterAnalysis adjacencyList.json adjacencyList\_lh.json}$\\
+We could then do some analysis with the data, and also generalize these analysis methods to any set of Twitter data, so it can be used by any other user. To run the analysis, execute $\texttt{TwitterAnalysis.java}$ with at least one argument, with each argument being the name of the json file.
 
 \noindent After setting up the graph, the program will provide a few prompts for the user to perform analysis on the graph.\\
 
 \noindent The following is a brief description of each class in the program:
 \begin{itemize}
 \item \texttt{analysis$\backslash$TriadicClosure}\\
-Main implementation of the analysis for the graph. Has methods to find number of triangles in a graph, and find and rank appropriate friends to recommend for a particular user, and can recommend who to follow based on who the user's friends are following. 
+Main implementation of the analysis for the graph. Has methods to find number of triangles in a graph, and find and rank appropriate friends to recommend for a particular user, and can recommend who to follow based on who a user's friends are following. 
 
 \item \texttt{graph$\backslash$Graph}\\
 Parses data from JSON files and populates a graph with Users.
@@ -44,7 +44,7 @@ Represents a particular user on Twitter.
 Can be run while the data collection is being run to check how many users' data has been collected, and how many users are in the queue.
 
 \item \texttt{retrieval$\backslash$RetrieveFriendsJSON}\\
-Retrieves user data, followers and following, for a particular user. The user is the next user ID on the queue. If it is the first time running, then it will initiate from a particular user.
+Retrieves user data, followers and following, for a particular user. The user is the next user ID on the queue. If it is the first time running, then it will initiate from a particular user. Instructions to set up a cron job to retrieve one's own set of data are attached in crontab\_setup.txt.
 
 \item \texttt{retrieval$\backslash$RetrieveTweets}\\
 Collects tweets for a particular user. Gets the next user ID from the list of nodes, and adds the tweet and hashtag data to the JSON file.\\
@@ -54,13 +54,14 @@ Collects tweets for a particular user. Gets the next user ID from the list of no
 For curiosity's sake, the following is a link that can turn a user ID into the user handle: \texttt{http://tweeterid.com/}\\
 
 \noindent\textbf{Running the project}\\
-For this project's purposes, we have compiled an executable jar that can be run for the analysis of our Twitter data. Run it according to the following commands:
+For this project's purposes, we have compiled an executable jar that can be run to analyse our Twitter data. Run it according to the following command:\\
 
-\begin{enumerate}
-\item 
+\texttt{java -jar -Xmx512m twitterAnalysis.jar adjacencyList.json}\\ \texttt{\indent\indent adjacencyList\_lh.json}\\
 
+\noindent\texttt{-Xmx512m} sets the maximum Java heap space.\\
 
-\end{enumerate}
+\noindent\textit{Design choice:}\\
+Twitter gives us a maximum of 5000 unique IDs each time we poll a particular user for his/her followers or friends, so we face a limitation in that we will only add at most 5000 IDs each time we visit a user. We believe this should not overly affect the results as this probably only is relevant for celebrities who have a huge number of followers. In any case, the 4000 unique users we have can hardly represent the full graph of Twitter users. Our implementation and analysis methods is independent of the graph size and a larger set of users may be retrieved and used in the same way. Note that the program accepts as command-line arguments any JSON file that represents Twitter user ids and their followers and friends in the same format.
 
 
 

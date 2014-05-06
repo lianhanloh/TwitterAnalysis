@@ -6,7 +6,7 @@ In this project, we retrieved our own dataset from Twitter by writing code in Ja
 We also wrote a program that can analyze the Twitter dataset that one has, including finding the
 number of triangles in the graph, and providing friend recommendations based on triadic closure.
 
-This project was mainly implementation, but also has some empirical analysis.
+This project was mainly implementation, but also has some empirical analysis. Further details of the project are in the project write up (hw5_project_writeup.pdf).
 
 The main project breakdown was as follows:
 Lianhan - implemented methods to build and analyze graph, also wrote the script and cronjob for
