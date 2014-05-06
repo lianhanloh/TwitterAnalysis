@@ -52,6 +52,11 @@ public class User {
     	return followers.contains(user) || following.contains(user);
     }
     
+    /** returns true if this user is following the user given as an argument */
+    public boolean follows(User user) {
+        return following.contains(user);
+    }
+    
     /** returns true if both users follow each other */
     public boolean isStrongFriend(User user) {
         return followers.contains(user) && following.contains(user);

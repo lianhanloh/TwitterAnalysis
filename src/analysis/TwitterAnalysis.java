@@ -35,11 +35,16 @@ public class TwitterAnalysis {
 			System.out.println("Which of the following "
 					+ "methods would you like to run?");
 			System.out.println("A. Number of users in dataset");
-			System.out.println("B. Number of triangles in graph");
-			System.out.println("C. Friend recommendations "
-					+ "for a user (strong ties**)");
+			System.out.println("B. Number of triangles in graph (Count strong "
+			        + "relationships only)");
+			System.out.println("C. Number of triangles in graph (Include weak "
+                    + "relationships too)");
 			System.out.println("D. Friend recommendations "
+					+ "for a user (strong ties**)");
+			System.out.println("E. Friend recommendations "
 					+ "for a user (weak ties**)");
+			System.out.println("F. Follow recommendations "
+			        + "for a user");
 
 			System.out.println("\n\nstrong ties: only friendships where both "
 					+ "users follow each other are counted");
@@ -62,11 +67,18 @@ public class TwitterAnalysis {
 						+ " users in the dataset");
 			}
 			else if (answer.equals("b") || answer.equals("B")) {
-				int triang = TriadicClosure.triangleNumber(graph.getGraph());
+				int triang = TriadicClosure.triangleNumber(graph.getGraph(), 
+				        true);
 				System.out.println("There are " + triang 
-						+ " triangles in the dataset");
+						+ " strongly-related triangles in the dataset");
 			}
 			else if (answer.equals("c") || answer.equals("C")) {
+			    int triang = TriadicClosure.triangleNumber(graph.getGraph(), 
+			            false);
+			    System.out.println("There are " + triang 
+			            + " weakly-related triangles in the dataset");
+			}
+			else if (answer.equals("d") || answer.equals("D")) {
 				System.out.println("Please enter User ID");
 				System.out.println("(For random user, type 0)");
 				String ans = in.nextLine();
@@ -78,7 +90,6 @@ public class TwitterAnalysis {
 					Object[] arr = graph.getGraph().toArray();
 					int random = (int) (Math.random() * arr.length);
 					User user = (User) arr[random];
-					System.out.println("Recommendations for: " + random);
 					TriadicClosure.friendRecommendation(graph.getGraph(), 
 							user.getID(), true, no);
 				}
@@ -88,7 +99,7 @@ public class TwitterAnalysis {
 							id, true, no);
 				}
 			}
-			else if (answer.equals("d") || answer.equals("D")) {
+			else if (answer.equals("e") || answer.equals("E")) {
 				System.out.println("Please enter User ID");
 				System.out.println("(For random user, type 0)");
 				String ans = in.nextLine();
@@ -102,7 +113,6 @@ public class TwitterAnalysis {
 					Object[] arr = graph.getGraph().toArray();
 					int random = (int) (Math.random() * arr.length);
 					User user = (User) arr[random];
-					System.out.println("Recommendations for: " + random);
 					TriadicClosure.friendRecommendation(graph.getGraph(), 
 							user.getID(), false, no);
 				}
@@ -111,10 +121,34 @@ public class TwitterAnalysis {
 					TriadicClosure.friendRecommendation(graph.getGraph(), 
 							id, false, no);
 				}
+			} else if (answer.equals("f") || answer.equals("F")) {
+                System.out.println("Please enter User ID");
+                System.out.println("(For random user, type 0)");
+                String ans = in.nextLine();
+
+                System.out.println("How many users would you "
+                        + "like recommended?");
+                int no = Integer.parseInt(in.nextLine().trim());
+
+                if (ans.equals("0")) {
+                    Object[] arr = graph.getGraph().toArray();
+                    int random = (int) (Math.random() * arr.length);
+                    User user = (User) arr[random];
+                    TriadicClosure.followRecommendations(graph.getGraph(), 
+                            user.getID(), no);
+                }
+                else {
+                    long id = Long.parseLong(ans);
+                    TriadicClosure.followRecommendations(graph.getGraph(), 
+                            id, no);
+                }
+            } else {
+			    System.out.println("Sorry. Invalid input. Please try again.\n"
+			            + "Type quit to exit the program");
 			}
 			//pause before prompting for next answer
 			try {
-				TimeUnit.MILLISECONDS.sleep(1000);
+				TimeUnit.MILLISECONDS.sleep(2000);
 			} catch (InterruptedException e) {
 				//do nothing
 			}
