@@ -25,3 +25,6 @@ lib/stanford*
 # ignore twitter4j.properties file
 src/twitter4j.properties
 bin/twitter4j.properties
+
+# OS X
+.DS_STORE

@@ -22,9 +22,12 @@ public class TwitterAnalysis {
 		try {
 			graph = new Graph(args);
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("Error: file failed to open");
+			System.out.println(e.getMessage());
+			System.exit(2);
 		} catch (JSONException e) {
-			e.printStackTrace();
+			System.out.println("JSON Error: " + e.getMessage());
+			System.exit(3);
 		}
 
 		while (true) {
@@ -37,10 +40,11 @@ public class TwitterAnalysis {
 					+ "for a user (strong ties**)");
 			System.out.println("D. Friend recommendations "
 					+ "for a user (weak ties**)");
-			System.out.println("\nstrong ties: edges have to be "
-					+ "bidirectional for a recommendation to be made");
-			System.out.println("weak ties: there is an existing "
-					+ "edge between users");
+
+			System.out.println("\n\nstrong ties: only friendships where both "
+					+ "users follow each other are counted");
+			System.out.println("weak ties: friendships where either or both "
+					+ "users follow each other are counted");
 
 			String answer = in.nextLine().trim();
 			if (answer.equals("quit")) {
@@ -108,7 +112,7 @@ public class TwitterAnalysis {
 							id, false, no);
 				}
 			}
-			//pause before prompt for next answer
+			//pause before prompting for next answer
 			try {
 				TimeUnit.MILLISECONDS.sleep(1000);
 			} catch (InterruptedException e) {

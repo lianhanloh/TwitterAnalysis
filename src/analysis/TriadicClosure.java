@@ -39,7 +39,6 @@ public class TriadicClosure {
         Set<Set<User>> triangles = new HashSet<Set<User>>();
 
         for (User user: allUsers) {
-        	System.out.println("Originating from :" + user.getID());
             HashSet<User> connected = user.getFollowers();
             connected.addAll(user.getFollowing());
             
@@ -85,6 +84,8 @@ public class TriadicClosure {
             System.out.println("Error: user is not in database");
             return;
         }
+        System.out.println("Getting " + num + " friend recommendations for" 
+                + "Twitter user " + id);
         // create set of potential friends
         TreeSet<Friend> potentials = new TreeSet<Friend> ();
         int count = 0;
@@ -118,7 +119,7 @@ public class TriadicClosure {
         int i = 0;
         for (Friend f: potentials) {
             if (i >= num) break;
-            System.out.println("Twitter user " + f.id + ":\t(" + f.count 
+            System.out.println("Twitter user " + f.id + ":\t\t(" + f.count 
                     + " mutual friends)");
             i++;
         }
