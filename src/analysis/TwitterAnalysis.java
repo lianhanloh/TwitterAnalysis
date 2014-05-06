@@ -36,16 +36,22 @@ public class TwitterAnalysis {
 			System.out.println("C. Friend recommendations "
 					+ "for a user (strong ties**)");
 			System.out.println("D. Friend recommendations "
-					+ "for a user (strong ties**)");
-			System.out.println("\n\nstrong ties: edges have to be "
+					+ "for a user (weak ties**)");
+			System.out.println("\nstrong ties: edges have to be "
 					+ "bidirectional for a recommendation to be made");
 			System.out.println("weak ties: there is an existing "
 					+ "edge between users");
 
 			String answer = in.nextLine().trim();
 			if (answer.equals("quit")) {
+				System.out.println("Are you sure you want to leave? :(");
+				try {
+					TimeUnit.MILLISECONDS.sleep(1000);
+				} catch (InterruptedException e) {
+					//do nothing
+				}
+				System.out.println("Bye");
 				System.exit(0);
-				break;
 			}
 			else if (answer.equals("a") || answer.equals("A")) {
 				System.out.println("There are " + graph.getGraph().size()
@@ -68,6 +74,7 @@ public class TwitterAnalysis {
 					Object[] arr = graph.getGraph().toArray();
 					int random = (int) (Math.random() * arr.length);
 					User user = (User) arr[random];
+					System.out.println("Recommendations for: " + random);
 					TriadicClosure.friendRecommendation(graph.getGraph(), 
 							user.getID(), true, no);
 				}
@@ -91,6 +98,7 @@ public class TwitterAnalysis {
 					Object[] arr = graph.getGraph().toArray();
 					int random = (int) (Math.random() * arr.length);
 					User user = (User) arr[random];
+					System.out.println("Recommendations for: " + random);
 					TriadicClosure.friendRecommendation(graph.getGraph(), 
 							user.getID(), false, no);
 				}
@@ -106,10 +114,6 @@ public class TwitterAnalysis {
 			} catch (InterruptedException e) {
 				//do nothing
 			}
-
 		}
-
-
 	}
-
 }
